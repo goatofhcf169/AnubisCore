@@ -12,9 +12,6 @@ import com.candyrealms.candycore.modules.combat.listeners.CombatListener;
 import com.candyrealms.candycore.modules.debug.DebugListeners;
 import com.candyrealms.candycore.modules.heads.listeners.HeadsListener;
 import com.candyrealms.candycore.modules.shards.listeners.ShardsListener;
-import com.candyrealms.candycore.modules.staff.listeners.ChatListeners;
-import com.candyrealms.candycore.modules.elitearmor.ArmorListeners;
-import com.candyrealms.candycore.modules.staff.listeners.StaffListeners;
 import com.candyrealms.candycore.utils.ColorUtil;
 import com.earth2me.essentials.Essentials;
 import lombok.Getter;
@@ -23,12 +20,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @Getter
-public final class CandyCore extends JavaPlugin {
+public final class AnubisCore extends JavaPlugin {
 
-    private static CandyCore instance;
+    private static AnubisCore instance;
 
     private ShardsCFG shardsCFG;
-    private StaffCFG staffCFG;
     private DonatorCFG donatorCFG;
     private HeadsCFG headsCFG;
     private MasksCFG masksCFG;
@@ -49,7 +45,6 @@ public final class CandyCore extends JavaPlugin {
         saveDefaultConfig();
         shardsCFG = new ShardsCFG(this);
         donatorCFG = new DonatorCFG(this);
-        staffCFG = new StaffCFG(this);
         headsCFG = new HeadsCFG(this);
         expCFG = new ExpCFG(this);
         masksCFG = new MasksCFG(this);
@@ -64,27 +59,32 @@ public final class CandyCore extends JavaPlugin {
         moduleManager = new ModuleManager(this);
 
         // Registering the listeners
-        Bukkit.getPluginManager().registerEvents(new ChatListeners(this), this);
         Bukkit.getPluginManager().registerEvents(new DebugListeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MiscListeners(this), this);
         Bukkit.getPluginManager().registerEvents(new CombatListener(this), this);
         Bukkit.getPluginManager().registerEvents(new BalanceListeners(this), this);
-        Bukkit.getPluginManager().registerEvents(new StaffListeners(this), this);
         Bukkit.getPluginManager().registerEvents(new SafeDZListeners(this), this);
         Bukkit.getPluginManager().registerEvents(new FactionListeners(), this);
         Bukkit.getPluginManager().registerEvents(new ShardsListener(), this);
-        Bukkit.getPluginManager().registerEvents(new ArmorListeners(), this);
+        // Revive module stores death records and listens to PlayerDeathEvent
+        Bukkit.getPluginManager().registerEvents(moduleManager.getReviveModule(), this);
+        // Chat moderation listener
+        Bukkit.getPluginManager().registerEvents(moduleManager.getChatModerationModule(), this);
+        // Block risky reload commands to prevent stale instances in other plugins
+        Bukkit.getPluginManager().registerEvents(moduleManager.getReloadGuardModule(), this);
         registerModules();
 
         // Registering the commands
         PaperCommandManager manager = new PaperCommandManager(this);
         manager.getCommandCompletions().registerAsyncCompletion("shards", c -> shardsCFG.getConfig().getConfigurationSection("shards").getKeys(false));
         manager.registerCommand(new CoreCommand(this));
-        manager.registerCommand(new ChatCommand(this));
         manager.registerCommand(new ExpShopCommand(this));
         manager.registerCommand(new ShardsCommand(this));
         manager.registerCommand(new DonateCommand(this));
-        manager.registerCommand(new StaffCommand(this));
+        manager.registerCommand(new ReviveCommand(this));
+        manager.registerCommand(new MuteChatCommand(this));
+        manager.registerCommand(new LockChatCommand(this));
+        manager.registerCommand(new SlowChatCommand(this));
 
         instance = this;
     }
@@ -92,10 +92,10 @@ public final class CandyCore extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        getModuleManager().getStaffModule().getStaffModeModule().onRestart();
+        // No-op
     }
 
-    public CandyCore getInst() {
+    public AnubisCore getInst() {
         return instance;
     }
 
@@ -103,14 +103,14 @@ public final class CandyCore extends JavaPlugin {
         if(Bukkit.getPluginManager().getPlugin("CombatTagPlus") == null) return;
 
         combatTagPlus = (CombatTagPlus) Bukkit.getPluginManager().getPlugin("CombatTagPlus");
-        Bukkit.getConsoleSender().sendMessage(ColorUtil.color("&4[&cAscoraCore&4] &fEnabling CombatTag Support!"));
+        Bukkit.getConsoleSender().sendMessage(ColorUtil.color("&4[&cAnubisCore&4] &fEnabling CombatTag Support!"));
     }
 
     private void registerEssentials() {
         if(Bukkit.getPluginManager().getPlugin("Essentials") == null) return;
 
         essentials = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
-        Bukkit.getConsoleSender().sendMessage(ColorUtil.color("&4[&cAscoraCore&4] &fEnabling Essentials Support!"));
+        Bukkit.getConsoleSender().sendMessage(ColorUtil.color("&4[&cAnubisCore&4] &fEnabling Essentials Support!"));
     }
 
     private void registerModules() {

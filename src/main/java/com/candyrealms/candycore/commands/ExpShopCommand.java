@@ -3,7 +3,7 @@ package com.candyrealms.candycore.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.modules.expshop.ExpShopModule;
 import org.bukkit.entity.Player;
 
@@ -12,7 +12,7 @@ public class ExpShopCommand extends BaseCommand {
 
     private final ExpShopModule module;
 
-    public ExpShopCommand(CandyCore plugin) {
+    public ExpShopCommand(AnubisCore plugin) {
         module = plugin.getModuleManager().getExpShopModule();
     }
 

@@ -28,6 +28,7 @@ repositories {
     }
     maven { url = "https://repo.aikar.co/content/groups/aikar/" }
     maven { url = 'https://repo.extendedclip.com/releases/' }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -35,6 +36,7 @@ dependencies {
     compileOnly fileTree(dir: 'libs', include: ['*.jar'])
     compileOnly 'me.clip:placeholderapi:2.11.6'
     compileOnly 'net.essentialsx:EssentialsX:2.19.0'
+    compileOnly 'com.github.NEZNAMY:TAB-API:5.2.5'
     implementation "co.aikar:acf-paper:0.5.1-SNAPSHOT"
     implementation "dev.triumphteam:triumph-gui:3.1.11"
     implementation("de.tr7zw:item-nbt-api:2.14.1")

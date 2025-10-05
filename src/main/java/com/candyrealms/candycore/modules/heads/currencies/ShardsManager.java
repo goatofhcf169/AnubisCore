@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.heads.currencies;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import me.fullpage.manticrods.data.MPlayers;
 import me.fullpage.manticrods.wrappers.MPlayer;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -8,11 +8,11 @@ import org.bukkit.entity.Player;
 
 public class ShardsManager {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     private FileConfiguration config;
 
-    public ShardsManager(CandyCore plugin) {
+    public ShardsManager(AnubisCore plugin) {
         this.plugin = plugin;
 
         config = plugin.getHeadsCFG().getConfig();

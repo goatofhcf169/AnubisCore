@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.heads;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.modules.heads.currencies.CrystalsManager;
 import com.candyrealms.candycore.modules.heads.currencies.MoneyManager;
 import com.candyrealms.candycore.modules.heads.currencies.ShardsManager;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 public class HeadsModule {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     @Getter
     private FileConfiguration config;
@@ -33,7 +33,7 @@ public class HeadsModule {
     private final ShardsManager shardsManager;
     private final TokenManager tokenManager;
 
-    public HeadsModule(CandyCore plugin) {
+    public HeadsModule(AnubisCore plugin) {
         this.plugin = plugin;
 
         config = plugin.getHeadsCFG().getConfig();

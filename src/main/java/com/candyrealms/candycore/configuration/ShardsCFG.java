@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.configuration;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class ShardsCFG {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     @Getter
     private FileConfiguration config;
@@ -18,7 +18,7 @@ public class ShardsCFG {
     @Getter
     private File file;
 
-    public ShardsCFG(CandyCore plugin) {
+    public ShardsCFG(AnubisCore plugin) {
         this.plugin = plugin;
 
         initializeConfig();

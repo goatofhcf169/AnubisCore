@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.configuration;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.utils.ColorUtil;
 import com.candyrealms.candycore.utils.ItemCreator;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ConfigManager {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     private FileConfiguration config;
 
@@ -82,7 +82,7 @@ public class ConfigManager {
     @Getter
     private ItemStack helpItem;
 
-    public ConfigManager(CandyCore plugin) {
+    public ConfigManager(AnubisCore plugin) {
         this.plugin = plugin;
 
         config = plugin.getConfig();

@@ -3,7 +3,7 @@ package com.candyrealms.candycore.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.modules.shards.ShardsModule;
 import com.candyrealms.candycore.utils.ColorUtil;
 import org.bukkit.Sound;
@@ -14,14 +14,14 @@ public class ShardsCommand extends BaseCommand {
 
     private final ShardsModule module;
 
-    public ShardsCommand(CandyCore plugin) {
+    public ShardsCommand(AnubisCore plugin) {
         module = plugin.getModuleManager().getShardsModule();
     }
 
     @Default
     @Subcommand("give")
     @Description("gives player a shard based on config")
-    @CommandPermission("candycore.admin")
+    @CommandPermission("anubiscore.admin")
     @CommandCompletion("@players @shards")
     @Syntax("<player> <shard>")
     public void onGive(CommandSender sender, OnlinePlayer player, String shardName) {

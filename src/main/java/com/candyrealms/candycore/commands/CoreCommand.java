@@ -3,7 +3,7 @@ package com.candyrealms.candycore.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.configuration.ConfigManager;
 import com.candyrealms.candycore.modules.debug.DebugModule;
 import com.candyrealms.candycore.modules.heads.HeadsModule;
@@ -14,21 +14,21 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-@CommandAlias("acore|core|ascoracore")
+@CommandAlias("anubiscore|acore|core")
 public class CoreCommand extends BaseCommand {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     private final ConfigManager configManager;
 
-    public CoreCommand(CandyCore plugin) {
+    public CoreCommand(AnubisCore plugin) {
         this.plugin = plugin;
 
         configManager = plugin.getConfigManager();
     }
 
     @Subcommand("reload")
-    @CommandPermission("candycore.admin")
+    @CommandPermission("anubiscore.admin")
     @Description("reloads the configuration values")
     public void onReload(CommandSender sender) {
         configManager.reloadConfig();
@@ -48,7 +48,7 @@ public class CoreCommand extends BaseCommand {
     }
 
     @Subcommand("givehead")
-    @CommandPermission("candycore.admin")
+    @CommandPermission("anubiscore.admin")
     @CommandAlias("givehead")
     @CommandCompletion("@players")
     @Description("gives you a head item")
@@ -60,7 +60,7 @@ public class CoreCommand extends BaseCommand {
     }
 
     @Subcommand("debug|damagedebug")
-    @CommandPermission("candycore.admin")
+    @CommandPermission("anubiscore.admin")
     @Description("toggles the damage debug mode")
     public void onDebug(Player sender) {
         DebugModule module = plugin.getModuleManager().getDebugModule();
@@ -78,7 +78,7 @@ public class CoreCommand extends BaseCommand {
     }
 
     @Subcommand("givehelp")
-    @CommandPermission("candycore.admin")
+    @CommandPermission("anubiscore.admin")
     @CommandCompletion("@players")
     public void onGiveHelp(CommandSender sender, OnlinePlayer player) {
         ItemStack itemStack = plugin.getConfigManager().getHelpItem();
@@ -91,15 +91,14 @@ public class CoreCommand extends BaseCommand {
 
     @Default
     @Subcommand("help")
-    @CommandPermission("candycore.admin")
+    @CommandPermission("anubiscore.admin")
     public void onHelp(CommandSender sender) {
         sender.sendMessage(" ");
-        sender.sendMessage(ColorUtil.color("&d&lAscora&5&lCore &f- &eHelp Commands"));
+        sender.sendMessage(ColorUtil.color("&d&lAnubis&5&lCore &f- &eHelp Commands"));
         sender.sendMessage(" ");
-        sender.sendMessage(ColorUtil.color("&d- /acore reload &f- &eReloads the configuration"));
-        sender.sendMessage(ColorUtil.color("&d- /acore debug &f- &eEnables damage debug mode"));
-        sender.sendMessage(ColorUtil.color("&d- /chat &f- &eShows the chat module commands"));
-        sender.sendMessage(ColorUtil.color("&d- /staff &f- &eToggles the staff module"));
+        sender.sendMessage(ColorUtil.color("&d- /anubiscore reload &f- &eReloads the configuration"));
+        sender.sendMessage(ColorUtil.color("&d- /anubiscore debug &f- &eEnables damage debug mode"));
+        // Staff and Chat modules removed
         sender.sendMessage(ColorUtil.color("&d- /expshop &f- &eOpens the exp shop menu"));
         sender.sendMessage(ColorUtil.color("&d- /giveshard &f- &eGives an enchantment shard"));
         sender.sendMessage(" ");

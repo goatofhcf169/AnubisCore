@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.shards;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.utils.ItemCreator;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
@@ -15,11 +15,11 @@ import java.util.List;
 
 public class ShardsModule {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     private FileConfiguration config;
 
-    public ShardsModule(CandyCore plugin) {
+    public ShardsModule(AnubisCore plugin) {
         this.plugin = plugin;
 
         config = plugin.getShardsCFG().getConfig();

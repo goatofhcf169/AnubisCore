@@ -1,9 +1,9 @@
-# CandyCore coded for CandyRealms Network
+﻿# AnubisCore coded for CandyRealms Network
 
-prefix: '&4&lAscora&f&lCore &c»'
+prefix: '&4&lAnubis&f&lCore &cÂ»'
 
 increase-blocking-damage: 1.25 # Player blocking takes 25% more damage
-heads-bypass-permission: 'ascoracore.headbypass'
+heads-bypass-permission: 'anubiscore.headbypass'
 safe-dz-world: 'SafeDZ'
 safe-dz-amount: 25 # The percentage to decrease sales by.
 
@@ -14,14 +14,14 @@ messages:
   reload: '%prefix% &fYou have reloaded the plugin.'
 
 help-star:
-  name: '&4&l»&c&l» &4&lHelp &c&lMenu &7&o(Right-Click) &c&l«&4&l«'
+  name: '&4&lÂ»&c&lÂ» &4&lHelp &c&lMenu &7&o(Right-Click) &c&lÂ«&4&lÂ«'
   material: 'NETHER_STAR'
   data: 0
   lore:
     - ''
     - '&4&lDescription'
-    - '&c▪ &fOpens a menu guiding you through our'
-    - '&c▪ &fserver economy & features!'
+    - '&câ–ª &fOpens a menu guiding you through our'
+    - '&câ–ª &fserver economy & features!'
     - ''
     - '&c&o&nRight-Click&f&o to open!'
 
@@ -41,11 +41,11 @@ better-balance:
   enabled: true
   message:
     - '&4&l&m-------&c&l&m------&4&l&m------'
-    - '&4»&c» &4&lNetwork &f&lBalances -'
+    - '&4Â»&cÂ» &4&lNetwork &f&lBalances -'
     - ''
     - '&4Money: &c$%vault_eco_balance_formatted%'
-    - '&4Shards: &c❖%manticrods_shards%'
-    - '&4Crystals: &c◈%manticswords_crystals%'
+    - '&4Shards: &câ–%manticrods_shards%'
+    - '&4Crystals: &câ—ˆ%manticswords_crystals%'
     - ''
     - '&7&o(Money is the main source of currency on our network.'
     - '&7&olearn more about our economy with the &n&o/economy&7&o command)'

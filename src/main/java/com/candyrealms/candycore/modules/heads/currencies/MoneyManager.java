@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.heads.currencies;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,13 +11,13 @@ import java.math.BigDecimal;
 
 public class MoneyManager {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     private final Essentials essentials;
 
     private FileConfiguration config;
 
-    public MoneyManager(CandyCore plugin) {
+    public MoneyManager(AnubisCore plugin) {
         this.plugin = plugin;
 
         essentials = plugin.getEssentials();

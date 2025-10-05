@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.combat;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.modules.combat.events.CombatTagExpireEvent;
 import lombok.Getter;
 import net.minelink.ctplus.TagManager;
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class CombatModule {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     @Getter
     private final PrinterAbuseManager printerAbuseManager;
@@ -26,7 +26,7 @@ public class CombatModule {
 
     private BukkitTask combatTask;
 
-    public CombatModule(CandyCore plugin) {
+    public CombatModule(AnubisCore plugin) {
         this.plugin = plugin;
 
         tagManager = plugin.getCombatTagPlus().getTagManager();
@@ -58,7 +58,7 @@ public class CombatModule {
             if(taggedPlayers.isEmpty()) {
                 Bukkit.getScheduler().cancelTask(combatTask.getTaskId());
                 combatTask.cancel();
-                System.out.println("[CandyCore] Stopping Combat Task!");
+                System.out.println("[AnubisCore] Stopping Combat Task!");
                 return;
             }
 

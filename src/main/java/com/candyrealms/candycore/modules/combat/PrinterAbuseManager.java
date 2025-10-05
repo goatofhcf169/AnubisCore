@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.combat;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -13,13 +13,13 @@ import java.util.UUID;
 
 public class PrinterAbuseManager {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     private final Map<UUID, Instant> cooldownPlayers = new HashMap<>();
 
     private BukkitTask cooldownTask;
 
-    public PrinterAbuseManager(CandyCore plugin) {
+    public PrinterAbuseManager(AnubisCore plugin) {
         this.plugin = plugin;
     }
 
@@ -39,7 +39,7 @@ public class PrinterAbuseManager {
         cooldownTask = Bukkit.getScheduler().runTaskTimer(plugin, () -> {
             if(cooldownPlayers.isEmpty()) {
                 cooldownTask.cancel();
-                System.out.println("[CandyCore] Cancelling Printer Cooldown!");
+                System.out.println("[AnubisCore] Cancelling Printer Cooldown!");
                 return;
             }
 

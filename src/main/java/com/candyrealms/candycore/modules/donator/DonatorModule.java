@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.donator;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.utils.ColorUtil;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 public class DonatorModule {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     private FileConfiguration config;
 
@@ -38,7 +38,7 @@ public class DonatorModule {
     private List<String> donatorPerkMessages;
     private List<String> potionsList;
 
-    public DonatorModule(CandyCore plugin) {
+    public DonatorModule(AnubisCore plugin) {
         this.plugin = plugin;
 
         config = plugin.getDonatorCFG().getConfig();

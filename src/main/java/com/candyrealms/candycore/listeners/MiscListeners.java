@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.listeners;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.configuration.ConfigManager;
 import com.golfing8.kore.event.StackedEntityDeathEvent;
 import de.tr7zw.changeme.nbtapi.NBTItem;
@@ -17,6 +17,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.entity.FishHook;
+import org.bukkit.projectiles.ProjectileSource;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -27,10 +33,18 @@ import java.util.stream.Collectors;
 
 public class MiscListeners implements Listener {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
-    public MiscListeners(CandyCore plugin) {
+    public MiscListeners(AnubisCore plugin) {
         this.plugin = plugin;
+
+        // Periodically remove orphaned fishing hooks to prevent NPEs in NMS tick
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                cleanupOrphanFishingHooks();
+            }
+        }.runTaskTimer(plugin, 100L, 100L);
     }
 
     @EventHandler
@@ -159,5 +173,59 @@ public class MiscListeners implements Listener {
 
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * resistanceTime, 0));
         }, 10L);
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event) {
+        cleanupHooksFor(event.getPlayer());
+    }
+
+    @EventHandler
+    public void onKick(PlayerKickEvent event) {
+        cleanupHooksFor(event.getPlayer());
+    }
+
+    @EventHandler
+    public void onWorldChange(PlayerChangedWorldEvent event) {
+        cleanupHooksFor(event.getPlayer());
+    }
+
+    private void cleanupHooksFor(Player player) {
+        try {
+            for (org.bukkit.entity.Entity entity : player.getWorld().getEntities()) {
+                if (!(entity instanceof FishHook)) continue;
+                FishHook hook = (FishHook) entity;
+                ProjectileSource src = hook.getShooter();
+                if (src == null) {
+                    hook.remove();
+                    continue;
+                }
+                if (src instanceof Player && ((Player) src).getUniqueId().equals(player.getUniqueId())) {
+                    hook.remove();
+                }
+            }
+        } catch (Throwable ignored) { }
+    }
+
+    private void cleanupOrphanFishingHooks() {
+        try {
+            for (org.bukkit.World world : Bukkit.getWorlds()) {
+                for (org.bukkit.entity.Entity entity : world.getEntities()) {
+                    if (!(entity instanceof FishHook)) continue;
+                    FishHook hook = (FishHook) entity;
+                    ProjectileSource src = hook.getShooter();
+                    if (src == null) {
+                        hook.remove();
+                        continue;
+                    }
+                    if (src instanceof Player) {
+                        Player p = (Player) src;
+                        if (!p.isOnline() || !p.isValid()) {
+                            hook.remove();
+                        }
+                    }
+                }
+            }
+        } catch (Throwable ignored) { }
     }
 }

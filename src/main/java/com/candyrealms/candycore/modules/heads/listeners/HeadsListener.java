@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.heads.listeners;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.configuration.ConfigManager;
 import com.candyrealms.candycore.modules.heads.HeadsModule;
 import com.candyrealms.candycore.utils.ColorUtil;
@@ -31,7 +31,7 @@ public class HeadsListener implements Listener {
 
     private final ConfigManager configManager;
 
-    public HeadsListener(CandyCore plugin) {
+    public HeadsListener(AnubisCore plugin) {
         module = plugin.getModuleManager().getHeadsModule();
         configManager = plugin.getConfigManager();
     }

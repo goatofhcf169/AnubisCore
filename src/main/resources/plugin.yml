@@ -1,13 +1,12 @@
-name: AscoraCore
+name: AnubisCore
 version: '${version}'
 softdepend:
   - PlaceholderAPI
   - FactionsKore
   - ManticHoes
-  - EliteArmor
   - ManticSwords
   - ManticRods
 depend:
   - CombatTagPlus
   - Factions
-main: com.candyrealms.candycore.CandyCore
+main: com.candyrealms.candycore.AnubisCore

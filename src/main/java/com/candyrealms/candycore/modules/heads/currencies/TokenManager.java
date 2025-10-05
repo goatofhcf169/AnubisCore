@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.heads.currencies;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import me.fullpage.mantichoes.data.MPlayers;
 import me.fullpage.mantichoes.wrappers.MPlayer;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -8,11 +8,11 @@ import org.bukkit.entity.Player;
 
 public class TokenManager {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     private FileConfiguration config;
 
-    public TokenManager(CandyCore plugin) {
+    public TokenManager(AnubisCore plugin) {
         this.plugin = plugin;
 
         config = plugin.getHeadsCFG().getConfig();

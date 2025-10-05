@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.masks;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.configuration.ConfigManager;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,7 +11,7 @@ public class MaskModule {
 
     private final ConfigManager configManager;
 
-    public MaskModule(CandyCore plugin) {
+    public MaskModule(AnubisCore plugin) {
         configManager = plugin.getConfigManager();
     }
 

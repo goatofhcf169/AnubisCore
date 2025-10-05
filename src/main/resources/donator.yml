@@ -1,40 +1,40 @@
-announce-rank:
+﻿announce-rank:
   enabled: true
   interval: 30 # The time in seconds to send announcement
-  permission: 'rank.ascora+'
+  permission: "rank.anubis+"
   message:
-    - ''
-    - '    &c&lOnline &8[&4Ascora&f+&8] &c&lMembers'
-    - ''
-    - '%players%'
-    - ''
-    - '&7Want to be featured? Purchase the &8[&4Ascora&f+&8] &7rank on our'
-    - '&7store @ &c&nstore.ascorapvp.net&7 and receive great perks!'
-    - ''
+    - ""
+    - "    &c&lOnline &8[&4Anubis&f+&8] &c&lMembers"
+    - ""
+    - "%players%"
+    - ""
+    - "&7Want to be featured? Purchase the &8[&4Anubis&f+&8] &7rank on our"
+    - "&7store @ &c&nstore.anubismc.cc&7 and receive great perks!"
+    - ""
 
 announce-donation:
   enabled: true
   potion-perks:
-    - 'SPEED:3:5'
-    - 'ABSORPTION:2:5'
-    - 'JUMP:2:5'
-  command: 'crate give %player% common 1' # global command that runs for every player.
+    - "SPEED:3:5"
+    - "ABSORPTION:2:5"
+    - "JUMP:2:5"
+  command: "crate give %player% common 1" # global command that runs for every player.
   message:
-    - ''
-    - '&4&lAscora&f&lPvP &c» &fThank you &a&n%player%&f for donating on our store!'
-    - ''
+    - ""
+    - "&4&lAnubis&f&lPvP &cÂ» &fThank you &a&n%player%&f for donating on our store!"
+    - ""
 
 donator-perks:
   enabled: true
-  permission: 'rank.ascora+'
+  permission: "rank.anubis+"
   interval: 30 # Time in seconds
   message:
-    - ''
-    - '&4&lAscora&c&lPvP &eFactions'
-    - ''
-    - '&7&oAll &4Ascora&f+ &7&omembers were just granted their'
-    - '&7&odaily donator rewards! Want to participate?'
-    - ''
-    - '&fPurchase a rank @ &c&nstore.ascorapvp.net&f!'
-    - ''
-  command: 'eco give %player% 10000' # gives rewards to these players every x seconds. [14400 is 4hours]
+    - ""
+    - "&4&lAnubis&c&lPvP &eFactions"
+    - ""
+    - "&7&oAll &4Anubis&f+ &7&omembers were just granted their"
+    - "&7&odaily donator rewards! Want to participate?"
+    - ""
+    - "&fPurchase a rank @ &c&nstore.anubismc.cc&f!"
+    - ""
+  command: "eco give %player% 10000" # gives rewards to these players every x seconds. [14400 is 4hours]

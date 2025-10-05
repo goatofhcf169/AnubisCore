@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.expshop;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.configuration.ExpCFG;
 import com.candyrealms.candycore.utils.ColorUtil;
 import com.candyrealms.candycore.utils.ItemCreator;
@@ -22,13 +22,13 @@ import java.util.List;
 
 public class ExpShopModule {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     private FileConfiguration config;
 
     private PaginatedGui gui;
 
-    public ExpShopModule(CandyCore plugin) {
+    public ExpShopModule(AnubisCore plugin) {
         this.plugin = plugin;
 
         config = plugin.getExpCFG().getConfig();
@@ -44,7 +44,7 @@ public class ExpShopModule {
         gui = Gui.paginated()
                 .title(Component.text(ColorUtil.color(config.getString("title"))))
                 .rows(3)
-                .pageSize(2)
+                .pageSize(18)
                 .create();
 
         gui.setItem(3, 4, ItemBuilder.from(Material.ARROW).setName(ColorUtil.color("&bPrevious")).asGuiItem(event -> gui.previous()));

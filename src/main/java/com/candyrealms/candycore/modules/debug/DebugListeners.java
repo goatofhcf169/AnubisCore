@@ -1,7 +1,7 @@
 package com.candyrealms.candycore.modules.debug;
 
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -14,7 +14,7 @@ public class DebugListeners implements Listener {
 
     private final DebugModule module;
 
-    public DebugListeners(CandyCore plugin) {
+    public DebugListeners(AnubisCore plugin) {
         module = plugin.getModuleManager().getDebugModule();
     }
 

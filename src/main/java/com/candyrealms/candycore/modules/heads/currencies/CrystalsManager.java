@@ -1,7 +1,7 @@
 package com.candyrealms.candycore.modules.heads.currencies;
 
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import me.fullpage.manticsword.data.MPlayers;
 import me.fullpage.manticsword.wrappers.MPlayer;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -9,11 +9,11 @@ import org.bukkit.entity.Player;
 
 public class CrystalsManager {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     private FileConfiguration config;
 
-    public CrystalsManager(CandyCore plugin) {
+    public CrystalsManager(AnubisCore plugin) {
         this.plugin = plugin;
 
         config = plugin.getHeadsCFG().getConfig();

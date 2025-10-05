@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.listeners;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.configuration.ConfigManager;
 import me.fullpage.manticrods.api.events.RodUseEvent;
 import me.fullpage.manticsword.api.events.SwordUseEvent;
@@ -12,7 +12,7 @@ public class SafeDZListeners implements Listener {
 
     private final ConfigManager configManager;
 
-    public SafeDZListeners(CandyCore plugin) {
+    public SafeDZListeners(AnubisCore plugin) {
         configManager = plugin.getConfigManager();
     }
 

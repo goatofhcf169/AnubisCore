@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.combat.listeners;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.modules.combat.CombatModule;
 import com.candyrealms.candycore.modules.combat.PrinterAbuseManager;
 import com.candyrealms.candycore.modules.combat.events.CombatTagExpireEvent;
@@ -20,7 +20,7 @@ public class CombatListener implements Listener {
 
     private final CombatModule combatModule;
 
-    public CombatListener(CandyCore plugin) {
+    public CombatListener(AnubisCore plugin) {
         combatModule = plugin.getModuleManager().getCombatModule();
         printerAbuseManager = combatModule.getPrinterAbuseManager();
     }
@@ -37,7 +37,7 @@ public class CombatListener implements Listener {
 
     @EventHandler
     public void onPrinter(PlayerPrinterEnterEvent event) {
-        if(event.getPlayer().hasPermission("candycore.admin")) return;
+        if(event.getPlayer().hasPermission("anubiscore.admin")) return;
 
         if(!printerAbuseManager.hasCooldown(event.getPlayer())) return;
 
@@ -50,14 +50,14 @@ public class CombatListener implements Listener {
             FPlayer nearbyFPlayer = FPlayers.getInstance().getByPlayer(nearbyPlayer);
 
             if(!nearbyFPlayer.hasFaction()) continue;
-            if(nearbyPlayer.hasPermission("candycore.admin")) continue;
+            if(nearbyPlayer.hasPermission("anubiscore.admin")) continue;
 
             nearbyEnemy = true;
         }
 
         if(!nearbyEnemy) return;
 
-        event.getPlayer().sendMessage(ColorUtil.color("&d&lCandy&5&lCore &fYou &c&nCANNOT&f enter printer quickly after leaving combat!"));
+        event.getPlayer().sendMessage(ColorUtil.color("&d&lAnubis&5&lCore &fYou &c&nCANNOT&f enter printer quickly after leaving combat!"));
         event.setCancelled(true);
     }
 }

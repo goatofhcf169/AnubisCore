@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.listeners;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.configuration.ConfigManager;
 import com.candyrealms.candycore.utils.ColorUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -17,7 +17,7 @@ public class BalanceListeners implements Listener {
 
     private final ConfigManager configManager;
 
-    public BalanceListeners(CandyCore plugin) {
+    public BalanceListeners(AnubisCore plugin) {
         configManager = plugin.getConfigManager();
     }
 

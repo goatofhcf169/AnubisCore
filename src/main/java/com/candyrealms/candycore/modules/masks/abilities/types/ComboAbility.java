@@ -1,6 +1,6 @@
 package com.candyrealms.candycore.modules.masks.abilities.types;
 
-import com.candyrealms.candycore.CandyCore;
+import com.candyrealms.candycore.AnubisCore;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class ComboAbility {
 
-    private final CandyCore plugin;
+    private final AnubisCore plugin;
 
     private final Map<UUID, Double> multipliers = new HashMap<>();
 
@@ -18,7 +18,7 @@ public class ComboAbility {
 
     private final double maxIncrease;
 
-    public ComboAbility(CandyCore plugin) {
+    public ComboAbility(AnubisCore plugin) {
         this.plugin = plugin;
 
         increase = maskConfig.getDouble("combo-mask.increase-per-hit");
