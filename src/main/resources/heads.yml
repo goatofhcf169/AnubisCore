@@ -1,0 +1,35 @@
+# Dependencies: ManticRods, ManticSwords, ManticHoes
+
+enabled: true
+
+token-deduction: 5 # The percentage to take from a player
+shard-deduction: 5 # The percentage to take from a player
+crystals-deduction: 5 # The percentage to take from a player
+money-deduction: 5 # The percentage to take from a player
+
+messages:
+  redeemed-head:
+    - ''
+    - '&5»&d» &5&lLoot Earned &7(Player Heads)'
+    - ''
+    - '&d▪ &fMoney: &a%money%'
+    - '&d▪ &fTokens: &5%tokens%'
+    - '&d▪ &fShards: &d%shards%'
+    - '&d▪ &fCrystals: &e%crystals%'
+    - ''
+
+head-item:
+  name: '&dHead of %player%'
+  material: 'SKULL_ITEM'
+  data: 3
+  texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWI3ZjU3NjFmNGNhNzI0NTJkYzE4ZWEyMThkYjE0OTAyMGY3ZmNiMTQ4NDMxNTQ3YTBhYWI0NGQ1NGI2Y2M3NCJ9fX0='
+  lore:
+    - '&7&oSlaying a player leaves behind their skull which contains'
+    - '&7&ovaluable loot waiting to be redeemed!'
+    - ''
+    - '&d▪ &fMoney: &a%money%'
+    - '&d▪ &fTokens: &5%tokens%'
+    - '&d▪ &fShards: &d%shards%'
+    - '&d▪ &fCrystals: &e%crystals%'
+    - ''
+    - '&5&l(!) &d&nRight-Click&f to sell this players head.'

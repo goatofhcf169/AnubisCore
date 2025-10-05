@@ -1,0 +1,13 @@
+shards:
+  depth3:
+    name: '&5&l[Enchant] &dDepth Strider III'
+    material: 'WHEAT'
+    enchantment: 'DEPTH_STRIDER:3'
+    data: 0
+    lore:
+      - ''
+      - '&5&lDescription'
+      - '&d● &fAllows the player to walk faster'
+      - '&d● &fwhen walking on water.'
+      - ''
+      - '&d&nDrag n'' Drop&f onto gear to apply!'

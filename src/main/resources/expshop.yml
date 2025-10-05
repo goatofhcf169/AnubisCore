@@ -1,0 +1,11 @@
+title: '&8Exp Shop'
+items:
+  example:
+    name: '&e&lExample Sword'
+    material: 'DIAMOND_SWORD'
+    command: 'give %player% diamond_sword 1'
+    price: 30
+    data: 0
+    lore:
+      - '&7&oAn example item!'
+      - '&f* &7Price: &f30 Levels'

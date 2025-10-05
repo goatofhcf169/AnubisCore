@@ -1,0 +1,18 @@
+attached-lore: "&f&lAttached Mask" # Plugin checks if player has mask by checking this in lore
+
+founder-mask:
+  attached-lore: "&f» &cPlanetary Mask"
+
+combo-mask:
+  attached-lore: "&f» &cCombo Mask"
+  increase-per-hit: 2.5 # The percentage damage increase per hit
+  max-increase: 25 # The maximum amount of extra damage
+
+slayer-mask:
+  attached-lore: "&f» &cSlayer Mask"
+  increase-sale: 30 # The percentage to increase the money gained [ManticSwords money]
+  rod-increase: 30 # The percentage of money to increase rod sales [ManticRods money]
+
+hydra-mask:
+  attached-lore: "&f» &cHydra Mask"
+  damage-increase: 10 # The percentage damage increase inside water
