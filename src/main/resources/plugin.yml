@@ -6,7 +6,74 @@ softdepend:
   - ManticHoes
   - ManticSwords
   - ManticRods
-depend:
   - CombatTagPlus
   - Factions
+  - DestroyTheCore
 main: com.candyrealms.candycore.AnubisCore
+permissions:
+  anubiscore.*:
+    description: Grants all AnubisCore permissions
+    default: op
+    children:
+      anubiscore.admin: true
+      anubiscore.revive: true
+      anubiscore.mutechat: true
+      anubiscore.lockchat: true
+      anubiscore.lockchat.bypass: true
+      anubiscore.chat.bypass: true
+      anubiscore.slowchat: true
+      anubiscore.chatclear: true
+      anubiscore.reload.bypass: true
+      anubiscore.headbypass: true
+      anubiscore.deathmessages.see: true
+      anubiscore.combatbar.see: true
+
+  anubiscore.admin:
+    description: Allows use of admin commands (/anubiscore, /revive)
+    default: op
+    children:
+      anubiscore.revive: true
+
+  anubiscore.revive:
+    description: Open revive menu (/revive)
+    default: op
+
+  anubiscore.mutechat:
+    description: Toggle global chat mute (/mutechat)
+    default: op
+
+  anubiscore.lockchat:
+    description: Toggle global chat lock (/lockchat)
+    default: op
+
+  anubiscore.lockchat.bypass:
+    description: Bypass chat lock and speak while locked
+    default: op
+
+  anubiscore.chat.bypass:
+    description: Bypass chat mute and slow mode
+    default: op
+
+  anubiscore.slowchat:
+    description: Set chat slow mode (/slowchat)
+    default: op
+
+  anubiscore.chatclear:
+    description: Clear chat for everyone (/clearchat)
+    default: op
+
+  anubiscore.reload.bypass:
+    description: Bypass AnubisCore reload guard for reload commands
+    default: false
+
+  anubiscore.headbypass:
+    description: Prevents your head from dropping (Heads module)
+    default: false
+
+  anubiscore.deathmessages.see:
+    description: View custom death messages when visibility is permission-based
+    default: op
+
+  anubiscore.combatbar.see:
+    description: View combat action bar when visibility is permission-based
+    default: true

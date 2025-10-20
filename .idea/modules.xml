@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CandyCore.main.iml" filepath="$PROJECT_DIR$/.idea/modules/CandyCore.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AnubisCore.main.iml" filepath="$PROJECT_DIR$/.idea/modules/AnubisCore.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AnubisCore.test.iml" filepath="$PROJECT_DIR$/.idea/modules/AnubisCore.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CandyCore.test.iml" filepath="$PROJECT_DIR$/.idea/modules/CandyCore.test.iml" />
     </modules>
   </component>

@@ -17,9 +17,12 @@ public class ComboAbility {
     private final double increase;
 
     private final double maxIncrease;
+    
+    private final FileConfiguration maskConfig;
 
     public ComboAbility(AnubisCore plugin) {
         this.plugin = plugin;
+        this.maskConfig = plugin.getMasksCFG().getConfig();
 
         increase = maskConfig.getDouble("combo-mask.increase-per-hit");
         maxIncrease = maskConfig.getDouble("combo-mask.max-increase");

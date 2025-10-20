@@ -43,11 +43,16 @@ dependencies {
 }
 
 shadowJar {
+    archiveClassifier.set('')
     relocate 'co.aikar.commands', 'com.candyrealms.candycore.utils.acf'
     relocate 'co.aikar.locales', 'com.candyrealms.candycore.utils.locales'
     relocate("dev.triumphteam.gui", "com.candyrealms.candycore.utils.gui")
     relocate("de.tr7zw.changeme.nbtapi", "com.candyrealms.candycore.utils.nbtapi")
 }
+
+// Make the shaded jar the primary artifact
+tasks.jar.configure { enabled = false }
+tasks.build.dependsOn tasks.shadowJar
 
 def targetJavaVersion = 8
 java {

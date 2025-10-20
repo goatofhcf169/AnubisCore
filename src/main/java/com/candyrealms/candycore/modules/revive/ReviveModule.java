@@ -2,6 +2,7 @@ package com.candyrealms.candycore.modules.revive;
 
 import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.utils.ColorUtil;
+import com.candyrealms.candycore.utils.CompatUtil;
 import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
@@ -61,7 +62,10 @@ public class ReviveModule implements Listener {
 
     public List<DeathRecord> getDeaths(UUID uuid) {
         Deque<DeathRecord> deque = history.getOrDefault(uuid, new ArrayDeque<>());
-        return new ArrayList<>(deque);
+        List<DeathRecord> list = new ArrayList<>(deque);
+        // Ensure latest death first by timestamp desc
+        list.sort(Comparator.comparingLong(DeathRecord::getTimestamp).reversed());
+        return list;
     }
 
     public void openDeathsMenu(Player staff, OfflinePlayer target) {
@@ -71,13 +75,13 @@ public class ReviveModule implements Listener {
             return;
         }
 
-        PaginatedGui gui = PaginatedGui.paginated()
+        PaginatedGui gui = Gui.paginated()
                 .title(Component.text(ColorUtil.color("&8Revive: &d" + target.getName())))
                 .rows(6)
                 .pageSize(45)
                 .create();
 
-        gui.getFiller().fillBottom(ItemBuilder.from(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15)).asGuiItem());
+        gui.getFiller().fillBottom(ItemBuilder.from(CompatUtil.glassPaneBlack()).asGuiItem());
         gui.setDefaultClickAction(e -> e.setCancelled(true));
 
         gui.setItem(6, 4, ItemBuilder.from(Material.ARROW).setName(ColorUtil.color("&bPrevious"))
@@ -119,29 +123,40 @@ public class ReviveModule implements Listener {
 
         gui.setDefaultClickAction(e -> e.setCancelled(true));
 
-        // Armor preview (arranged vertically left)
+        // Armor preview along the top row (row 1)
         ItemStack[] armor = record.getArmor();
         if (armor.length >= 4) {
-            gui.setItem(2, 2, ItemBuilder.from(armor[3] == null ? new ItemStack(Material.AIR) : armor[3].clone()).asGuiItem()); // Helmet
-            gui.setItem(3, 2, ItemBuilder.from(armor[2] == null ? new ItemStack(Material.AIR) : armor[2].clone()).asGuiItem()); // Chest
-            gui.setItem(4, 2, ItemBuilder.from(armor[1] == null ? new ItemStack(Material.AIR) : armor[1].clone()).asGuiItem()); // Legs
-            gui.setItem(5, 2, ItemBuilder.from(armor[0] == null ? new ItemStack(Material.AIR) : armor[0].clone()).asGuiItem()); // Boots
+            // Standard order: helmet, chest, leggings, boots
+            gui.setItem(1, 3, ItemBuilder.from(armor[3] == null ? new ItemStack(Material.AIR) : armor[3].clone()).asGuiItem()); // Helmet
+            gui.setItem(1, 4, ItemBuilder.from(armor[2] == null ? new ItemStack(Material.AIR) : armor[2].clone()).asGuiItem()); // Chest
+            gui.setItem(1, 5, ItemBuilder.from(armor[1] == null ? new ItemStack(Material.AIR) : armor[1].clone()).asGuiItem()); // Legs
+            gui.setItem(1, 6, ItemBuilder.from(armor[0] == null ? new ItemStack(Material.AIR) : armor[0].clone()).asGuiItem()); // Boots
         }
 
-        // Inventory preview (first 27 items)
+        // Full inventory preview (all 36 items)
         ItemStack[] contents = record.getContents();
-        int slot = 10; // start somewhere central
-        for (int i = 0; i < Math.min(contents.length, 27); i++) {
-            ItemStack is = contents[i];
-            if (is == null || is.getType() == Material.AIR) continue;
-            int row = 2 + (i / 9);
-            int col = 4 + (i % 9);
-            int guiRow = Math.min(6, row);
-            int guiCol = Math.min(9, col);
-            try {
-                gui.setItem(guiRow, guiCol, ItemBuilder.from(is.clone()).asGuiItem());
-            } catch (Exception ignored) {
+        int max = Math.min(contents.length, 36);
+        // Layout: rows 2-4 show indices 9..35 (27 slots), row 5 shows hotbar 0..8
+        for (int i = 0; i < max; i++) {
+            int idx;
+            int row;
+            int col;
+            if (i < 27) {
+                idx = 9 + i;
+                row = 2 + (i / 9);
+                col = 1 + (i % 9);
+            } else {
+                // hotbar
+                idx = i - 27;
+                row = 5;
+                col = 1 + (i - 27);
             }
+            if (idx < 0 || idx >= contents.length) continue;
+            ItemStack is = contents[idx];
+            if (is == null || is.getType() == Material.AIR) continue;
+            try {
+                gui.setItem(row, col, ItemBuilder.from(is.clone()).asGuiItem());
+            } catch (Exception ignored) {}
         }
 
         // Info book
@@ -154,10 +169,10 @@ public class ReviveModule implements Listener {
                         record.getLocation().getWorld().getName(),
                         record.getLocation().getX(), record.getLocation().getY(), record.getLocation().getZ()))
         );
-        gui.setItem(2, 8, ItemBuilder.from(Material.BOOK_AND_QUILL).setName(ColorUtil.color("&dDeath Info")).setLore(infoLore).asGuiItem());
+        gui.setItem(1, 8, ItemBuilder.from(new ItemStack(CompatUtil.mat("BOOK_AND_QUILL", "WRITABLE_BOOK"))).setName(ColorUtil.color("&dDeath Info")).setLore(infoLore).asGuiItem());
 
         // Buttons
-        GuiItem revive = ItemBuilder.from(new ItemStack(Material.WOOL, 1, (short) 5))
+        GuiItem revive = ItemBuilder.from(new ItemStack(CompatUtil.mat("WOOL", "LIME_WOOL", "GREEN_WOOL"), 1, (short) 5))
                 .setName(ColorUtil.color("&a&lRevive Player"))
                 .setLore(ColorUtil.color("&7Restore target's items from this death."))
                 .asGuiItem(e -> {
@@ -177,7 +192,7 @@ public class ReviveModule implements Listener {
                     e.getWhoClicked().closeInventory();
                 });
 
-        GuiItem cancel = ItemBuilder.from(new ItemStack(Material.WOOL, 1, (short) 14))
+        GuiItem cancel = ItemBuilder.from(new ItemStack(CompatUtil.mat("WOOL", "RED_WOOL"), 1, (short) 14))
                 .setName(ColorUtil.color("&c&lCancel"))
                 .asGuiItem(e -> e.getWhoClicked().closeInventory());
 
@@ -187,4 +202,3 @@ public class ReviveModule implements Listener {
         gui.open(staff);
     }
 }
-

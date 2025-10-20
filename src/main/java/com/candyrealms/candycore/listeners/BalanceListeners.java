@@ -3,6 +3,7 @@ package com.candyrealms.candycore.listeners;
 import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.configuration.ConfigManager;
 import com.candyrealms.candycore.utils.ColorUtil;
+import com.candyrealms.candycore.utils.CompatUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -31,7 +32,7 @@ public class BalanceListeners implements Listener {
 
         getBalanceMessage(player).forEach(player::sendMessage);
 
-        player.playSound(player.getLocation(), Sound.LEVEL_UP, 6, 6);
+        CompatUtil.play(player, 6f, 6f, "LEVEL_UP", "ENTITY_PLAYER_LEVELUP");
 
         event.setCancelled(true);
     }

@@ -6,6 +6,7 @@ import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.modules.shards.ShardsModule;
 import com.candyrealms.candycore.utils.ColorUtil;
+import com.candyrealms.candycore.utils.CompatUtil;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 
@@ -33,7 +34,7 @@ public class ShardsCommand extends BaseCommand {
         module.giveShard(player.getPlayer(), shardName);
 
         player.getPlayer().sendMessage(ColorUtil.color("&5&lSHARDS &fYou have received a shard!"));
-        player.getPlayer().playSound(player.getPlayer().getLocation(), Sound.LEVEL_UP, 7, 6);
+        CompatUtil.play(player.getPlayer(), 7f, 6f, "LEVEL_UP", "ENTITY_PLAYER_LEVELUP");
     }
 
 }

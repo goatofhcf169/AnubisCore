@@ -4,6 +4,7 @@ import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.configuration.ConfigManager;
 import com.candyrealms.candycore.modules.heads.HeadsModule;
 import com.candyrealms.candycore.utils.ColorUtil;
+import com.candyrealms.candycore.utils.CompatUtil;
 import com.earth2me.essentials.api.Economy;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
@@ -77,8 +78,6 @@ public class HeadsListener implements Listener {
         NBTCompound compound = nbtItem.getCompound("CandyHeads");
 
         long money = compound.getLong("money");
-        long shards = compound.getLong("shards");
-        long crystals = compound.getLong("crystals");
         double tokens = compound.getDouble("tokens");
 
         NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
@@ -86,28 +85,23 @@ public class HeadsListener implements Listener {
         formatter.setMaximumFractionDigits(2);
 
         String formattedMoney = Economy.format(new BigDecimal(money));
-        String formattedCrystals = formatter.format(crystals);
-        String formattedShards = formatter.format(shards);
         String formattedTokens = formatter.format(tokens);
 
         player.setItemInHand(null);
 
-        module.addShards(player, shards);
-        module.addCrystals(player, crystals);
         module.addMoney(player, money);
         module.addTokens(player, tokens);
 
         List<String> message = module.getConfig().getStringList("messages.redeemed-head").stream()
                 .map(s -> s.replace("%money%", formattedMoney))
                 .map(s -> s.replace("%tokens%", formattedTokens))
-                .map(s -> s.replace("%shards%", formattedShards))
-                .map(s -> s.replace("%crystals%", formattedCrystals))
+                .map(s -> s.replace("%mantichoes_tokens%", formattedTokens))
                 .map(ColorUtil::color)
                 .collect(Collectors.toList());
 
         message.forEach(player::sendMessage);
 
-        player.playSound(player.getLocation(), Sound.ORB_PICKUP, 7, 6);
+        CompatUtil.play(player, 7f, 6f, "ORB_PICKUP", "ENTITY_EXPERIENCE_ORB_PICKUP");
 
         event.setCancelled(true);
     }

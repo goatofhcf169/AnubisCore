@@ -19,7 +19,7 @@ public class ReviveCommand extends BaseCommand {
     }
 
     @Default
-    @CommandPermission("anubiscore.admin")
+    @CommandPermission("anubiscore.revive")
     @CommandCompletion("@players")
     @Syntax("<player>")
     public void onRevive(Player sender, OnlinePlayer targetArg) {
@@ -35,4 +35,3 @@ public class ReviveCommand extends BaseCommand {
         module.openDeathsMenu(sender, target);
     }
 }
-

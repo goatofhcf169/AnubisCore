@@ -1,33 +1,33 @@
-﻿# AnubisCore coded for CandyRealms Network
+﻿# AnubisCore coded for AnubisMC Network
 
-prefix: '&4&lAnubis&f&lCore &cÂ»'
+prefix: "&6&lAnubis&e&lCore &8»"
 
 increase-blocking-damage: 1.25 # Player blocking takes 25% more damage
-heads-bypass-permission: 'anubiscore.headbypass'
-safe-dz-world: 'SafeDZ'
+heads-bypass-permission: "anubiscore.headbypass"
+safe-dz-world: "SafeDZ"
 safe-dz-amount: 25 # The percentage to decrease sales by.
 
 messages:
-  chat-cleared: '%prefix% &fThe chat has been cleared.'
-  chat-unmute: '%prefix% &fThe chat has been unmuted.'
-  chat-mute: '%prefix% &fThe chat has been muted.'
-  reload: '%prefix% &fYou have reloaded the plugin.'
+  chat-cleared: "%prefix% &fThe chat has been cleared."
+  chat-unmute: "%prefix% &fThe chat has been unmuted."
+  chat-mute: "%prefix% &fThe chat has been muted."
+  reload: "%prefix% &fYou have reloaded the plugin."
 
 help-star:
-  name: '&4&lÂ»&c&lÂ» &4&lHelp &c&lMenu &7&o(Right-Click) &c&lÂ«&4&lÂ«'
-  material: 'NETHER_STAR'
+  name: "&6&lÂ» &6&lHelp &c&lMenu &7&o(Right-Click) &6&lÂ«"
+  material: "NETHER_STAR"
   data: 0
   lore:
-    - ''
-    - '&4&lDescription'
-    - '&câ–ª &fOpens a menu guiding you through our'
-    - '&câ–ª &fserver economy & features!'
-    - ''
-    - '&c&o&nRight-Click&f&o to open!'
+    - ""
+    - "&6&lDescription"
+    - "&c- &fOpens a menu guiding you through our"
+    - "&c- &fserver economy & features!"
+    - ""
+    - "&c&o&nRight-Click&f&o to open!"
 
 nerf-god-apples:
   enabled: true # Whether to nerf resistance from god-apples
-  resistance-time: 20 # Reduces resistance time. Set to -1 to disable resistance entirely.
+  resistance-time: -1 # Reduces resistance time. Set to -1 to disable resistance entirely.
 
 protection-nerf:
   enabled: true
@@ -40,14 +40,49 @@ sharpness-buff: # Buffs sharpness above 5
 better-balance:
   enabled: true
   message:
-    - '&4&l&m-------&c&l&m------&4&l&m------'
-    - '&4Â»&cÂ» &4&lNetwork &f&lBalances -'
-    - ''
-    - '&4Money: &c$%vault_eco_balance_formatted%'
-    - '&4Shards: &câ–%manticrods_shards%'
-    - '&4Crystals: &câ—ˆ%manticswords_crystals%'
-    - ''
-    - '&7&o(Money is the main source of currency on our network.'
-    - '&7&olearn more about our economy with the &n&o/economy&7&o command)'
-    - '&4&l&m-------&c&l&m------&4&l&m------'
+    - "&6&l&m-------&e&l&m------&6&l&m------"
+    - "&6&lNetwork &f&lBalances -"
+    - ""
+    - "&6Money: &a$%vault_eco_balance_formatted%"
+    - "&6Coins: &e%manticrods_tokens%"
+    - ""
+    - "&7&o(Money is the main source of currency on our network."
+    - "&7&olearn more about our economy with the &n&o/economy&7&o command)"
+    - "&6&l&m-------&e&l&m------&6&l&m------"
 
+combat-actionbar:
+  enabled: true
+  send-to-victim: true
+  send-to-attacker: true
+  segments: 20
+  update-ticks: 10
+  use-combattagplus-duration: true
+  default-duration: 15
+  format: "&c&lCombat &7» &8(&a&l%bar%&8) &8(&c%seconds%s&8)"
+  active-color: "&a"
+  inactive-color: "&c"
+  active-char: "|"
+  inactive-char: "|"
+
+  visibility:
+    ops-only: false
+    permission: "anubiscore.combatbar.see"
+
+# Factions grace configuration used by %factions_grace_time%
+grace:
+  # End time in the given timezone, format: yyyy-MM-dd HH:mm:ss
+  # Example below is 8 PM on Oct 20, 2025 in New York time
+  ends_at: "2025-11-10 15:00:00"
+  # IANA timezone id for the end time above (e.g., America/New_York)
+  timezone: "America/New_York"
+  # Suffix displayed after the timer (appearance only)
+  display_label: "EST"
+  # Source for grace time: auto | kore | config | papi
+  # - auto: use FactionsKore if present, else external PAPI if provided, else config
+  # - kore: force FactionsKore GracePeriodFeature
+  # - config: always use ends_at/timezone above
+  # - papi: use external placeholder below
+  source: "auto"
+  # External PAPI placeholder to pull remaining time from when source=papi or auto (fallback)
+  # Example: "someplugin_grace_seconds" (wraps automatically in %...%)
+  papi_placeholder: ""

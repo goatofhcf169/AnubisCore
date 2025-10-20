@@ -2,6 +2,7 @@ package com.candyrealms.candycore.modules.donator;
 
 import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.utils.ColorUtil;
+import com.candyrealms.candycore.utils.CompatUtil;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -54,11 +55,15 @@ public class DonatorModule {
 
     public void donate(UUID uuid) {
         Player player = Bukkit.getPlayer(uuid);
+        if (player == null) return;
 
         Bukkit.getWorld(player.getWorld().getName()).spawnEntity(player.getLocation(), EntityType.FIREWORK);
 
-        donationMessages.forEach(string -> Bukkit.broadcastMessage(ColorUtil.color(string
-                .replace("%player%", player.getName()))));
+        // Do not announce donations for OPs
+        if (!player.isOp()) {
+            donationMessages.forEach(string -> Bukkit.broadcastMessage(ColorUtil.color(string
+                    .replace("%player%", player.getName()))));
+        }
 
         List<UUID> onlinePlayers = Bukkit.getOnlinePlayers().stream()
                 .filter(p -> p.hasPermission(rankPermission))
@@ -68,7 +73,7 @@ public class DonatorModule {
         for(UUID playerUUID : onlinePlayers) {
             Player onlinePlayer = Bukkit.getPlayer(playerUUID);
 
-            onlinePlayer.playSound(onlinePlayer.getLocation(), Sound.LEVEL_UP, 7, 7);
+            CompatUtil.play(onlinePlayer, 7f, 7f, "LEVEL_UP", "ENTITY_PLAYER_LEVELUP");
 
             givePotions(onlinePlayer, potionsList);
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), globalDonoReward
@@ -111,8 +116,9 @@ public class DonatorModule {
         rankAnnTask = Bukkit.getScheduler().runTaskTimer(plugin, ()-> {
             List<String> rankedPlayers = Bukkit.getOnlinePlayers().stream()
                     .filter(p -> p.hasPermission(rankPermission))
+                    .filter(p -> !p.isOp())
                     .map(Player::getName)
-                    .map(s -> ColorUtil.color("&c" + s))
+                    .map(s -> ColorUtil.color("&6" + s))
                     .collect(Collectors.toList());
 
             rankAnnMessages.forEach(string -> {

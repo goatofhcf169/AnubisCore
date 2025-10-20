@@ -1,13 +1,37 @@
 shards:
   depth3:
-    name: '&5&l[Enchant] &dDepth Strider III'
-    material: 'WHEAT'
-    enchantment: 'DEPTH_STRIDER:3'
+    name: '&6&l[Enchant] &eDepth Strider III'
+    material: PRISMARINE_SHARD
+    enchantment: DEPTH_STRIDER:3
     data: 0
     lore:
       - ''
-      - '&5&lDescription'
-      - '&d● &fAllows the player to walk faster'
-      - '&d● &fwhen walking on water.'
+      - '&6&lDescription'
+      - '&e● &fAllows the player to walk faster'
+      - '&e● &fwhen walking on water.'
       - ''
-      - '&d&nDrag n'' Drop&f onto gear to apply!'
+      - '&e&nDrag n'' Drop&f onto gear to apply!'
+  prot5:
+    name: '&3&l[Enchant] &bProtection V'
+    material: PRISMARINE_CRYSTALS
+    enchantment: PROTECTION_ENVIRONMENTAL:5
+    data: 0
+    lore:
+      - ''
+      - '&3&lDescription'
+      - '&b● &fGrants increased protection per level'
+      - '&b● &ffrom all enemy attacks.'
+      - ''
+      - '&b&nDrag n'' Drop&f onto gear to apply!'
+  sharp6:
+    name: '&6&l[Enchant] &eSharpness VI'
+    material: NETHER_STAR
+    enchantment: DAMAGE_ALL:6
+    data: 0
+    lore:
+      - ''
+      - '&6&lDescription'
+      - '&e● &fDeals increased damage per level to'
+      - '&e● &fall enemies and mobs!'
+      - ''
+      - '&e&nDrag n'' Drop&f onto gear to apply!'

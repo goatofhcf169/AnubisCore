@@ -1,11 +1,275 @@
-title: '&8Exp Shop'
-items:
-  example:
-    name: '&e&lExample Sword'
-    material: 'DIAMOND_SWORD'
-    command: 'give %player% diamond_sword 1'
-    price: 30
-    data: 0
+gui:
+  categories:
+    title: '&8XP Shop'
+    rows: 4
+    page_size: 27
+    filler: ''
+    nav:
+      previous:
+        row: 4
+        col: 4
+        material: ARROW
+        name: '&bPrevious'
+      next:
+        row: 4
+        col: 6
+        material: ARROW
+        name: '&bNext'
+    info_item:
+      enabled: true
+      row: 1
+      col: 5
+      head: true
+      material: SKULL_ITEM
+      data: 3
+      name: '&a&nXP Shop&r'
+      texture: ''
+      lore:
+        - ''
+        - '&a┃ &fBalance: &a%player_xp% Levels'
+        - ''
+        - '&aHow to obtain XP?'
+        - '&a┃ &fKill mobs'
+        - '&a┃ &fMine ores'
+        - ''
+        - '&aHow can I boost my XP?'
+        - '&a┃ &dUse Grind Enchant'
+  category:
+    title: '&8XP Shop: %category_name%'
+    rows: 4
+    page_size: 27
+    filler: ''
+    nav:
+      previous:
+        row: 4
+        col: 4
+        material: ARROW
+        name: '&bPrevious'
+      next:
+        row: 4
+        col: 6
+        material: ARROW
+        name: '&bNext'
+      back:
+        row: 4
+        col: 5
+        material: BARRIER
+        name: '&cBack'
+    info_item:
+      enabled: true
+      row: 4
+      col: 9
+      head: true
+      material: SKULL_ITEM
+      data: 3
+      name: '&a&nYour XP&r'
+      texture: ''
+      lore:
+        - ''
+        - '&a┃ &fBalance: &a%player_xp% Levels'
+        - ''
+        - '&aHow to obtain XP?'
+        - '&a┃ &fKill mobs'
+        - '&a┃ &fMine ores'
+        - ''
+        - '&aHow can I boost my XP?'
+        - '&a┃ &dUse Grind Enchant'
+messages:
+  cannot_afford: '&5&lEXP &fYou cannot afford this!'
+  purchased: '&aPurchased &f%item_name% &afor &f%price% &alevels.'
+sounds:
+  cannot_afford:
+    legacy: VILLAGER_NO
+    modern: ENTITY_VILLAGER_NO
+    volume: 7.0
+    pitch: 6.0
+  purchased:
+    legacy: LEVEL_UP
+    modern: ENTITY_PLAYER_LEVELUP
+    volume: 1.0
+    pitch: 1.0
+categories:
+  enchants:
+    name: '&b&lShards'
+    material: SKULL_ITEM
+    data: 3
+    texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTc4OWM0N2U2ZTRlNmJkNWY5MTE2YTJkOWViOWE3ZmQ5YjExYjU2MGY5OTIyNDI5ZjBiZWM0OTA2ODk3Nzk4NyJ9fX0=
+    slot: 11
     lore:
-      - '&7&oAn example item!'
-      - '&f* &7Price: &f30 Levels'
+      - '&7Buy useful shards.'
+    items:
+      depth3:
+        name: '&b&lDepth Strider III'
+        material: PRISMARINE_SHARD
+        data: 0
+        price: 1000
+        slot: 14
+        commands:
+          - shard %player% depth3
+        lore:
+          - ''
+          - '&3&lDescription'
+          - '&b» &fWalk faster when on water.'
+          - ''
+          - '&f* &bPrice: &f%price% Levels'
+          - '&f* &bYour Levels: &f%player_xp%'
+  perks:
+    name: '&c&lPerks'
+    material: SKULL_ITEM
+    data: 3
+    texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGNkOWRkZjRmYjllMjVlNjJkMmU5ODU5NWQ1MTY4ZGUyYjMzNjdiYTc4ZjM2OTdiZTFjNDc5ZjM1MTAyYWQ3NiJ9fX0=
+    slot: 15
+    lore:
+      - '&7Temporary and permanent perks.'
+    items:
+      fixperk:
+        name: '&c&lFix All Perk &7&o(7 Days)'
+        material: ANVIL
+        data: 1
+        price: 100000
+        slot: 14
+        commands:
+          - vouchers give FixPerk 1 %player%
+        lore:
+          - ''
+          - '&4&lDescription'
+          - '&c» &fAllows fixing armor and tools.'
+          - ''
+          - '&f* &cPrice: &f%price% Levels'
+          - '&f* &cYour Levels: &f%player_xp%'
+  keys:
+    name: '&6&lKeys'
+    material: SKULL_ITEM
+    data: 3
+    texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjk2YjZjNzdmMmMxMTMzZjZkZjczNmVmMmQ4YzUyZDQ3ZjU4NDg3YzIzZTg0ODBlZjc5ZTBkNjBhMjg5ZjU4In19fQ==
+    slot: 13
+    lore:
+      - '&7Crate keys for various crates.'
+    items:
+      spawnerkey:
+        name: '&4&lSpawner &c&lKey'
+        material: TRIPWIRE_HOOK
+        data: 1
+        price: 75000
+        slot: 12
+        commands:
+          - crate give %player% spawner 1
+        lore:
+          - ''
+          - '&4&lDescription'
+          - '&c» &fGrants a &4Spawner &cKey&f.'
+          - '&c» &fUse at crates for a random spawner.'
+          - ''
+          - '&f* &cPrice: &f%price% Levels'
+          - '&f* &cYour Levels: &f%player_xp%'
+      pumpkinkey:
+        name: '&6&lPumpkin &e&lKey'
+        material: TRIPWIRE_HOOK
+        data: 1
+        price: 100000
+        slot: 14
+        commands:
+          - crate give %player% pie 1
+        lore:
+          - ''
+          - '&6&lDescription'
+          - '&e» &fGrants a &6Pumpkin &eKey&f.'
+          - '&e» &fUse at crates for a random item.'
+          - ''
+          - '&f* &ePrice: &f%price% Levels'
+          - '&f* &eYour Levels: &f%player_xp%'
+      cactuskey:
+        name: '&2&lCactus &a&lKey'
+        material: TRIPWIRE_HOOK
+        data: 1
+        price: 125000
+        slot: 16
+        commands:
+          - crate give %player% cactus 1
+        lore:
+          - ''
+          - '&2&lDescription'
+          - '&a» &fGrants a &2Cactus &aKey&f.'
+          - '&a» &fUse at crates for a random item.'
+          - ''
+          - '&f* &aPrice: &f%price% Levels'
+          - '&f* &aYour Levels: &f%player_xp%'
+  bosses_orbs:
+    name: '&4&lMiscellaneous'
+    material: SKULL_ITEM
+    data: 3
+    texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjQ0MmExZTA4ZWE3N2ZkMTQ0YzhmZjRjZGFlZjZlMGE5YWFmYjgzZmRjZjM5OGQxNDhkOGYxNzQ0NGM4ZmE2NyJ9fX0=
+    slot: 17
+    lore:
+      - '&7Boss summons and faction orbs.'
+    items:
+      boss:
+        name: '&4&lMystery Boss &c&lSpawner'
+        material: DRAGON_EGG
+        data: 1
+        price: 150000
+        slot: 12
+        commands:
+          - voucher give RandomBossEgg 1 %player%
+        lore:
+          - ''
+          - '&4&lDescription'
+          - '&7&oGrants a random boss summon.'
+          - ''
+          - '&f* &cPrice: &f%price% Levels'
+          - '&f* &cYour Levels: &f%player_xp%'
+      randomritual:
+        name: '&f1x &d&lMystery Ritual Orb'
+        material: ANVIL
+        data: 1
+        price: 500000
+        slot: 14
+        commands:
+          - vouchers give ritualrandom 1 %player%
+        lore:
+          - ''
+          - '&d&lDescription'
+          - '&5» &fNeed 3 Orbs to activate a faction boost.'
+          - ''
+          - '&f* &dPrice: &f%price% Levels'
+          - '&f* &dYour Levels: &f%player_xp%'
+      randompvpitems:
+        name: '&f1x &6&lRandom PvP Item'
+        material: ANVIL
+        data: 1
+        price: 5000
+        slot: 16
+        commands:
+          - voucher give randompvpitem 1 %player%
+        lore:
+          - ''
+          - '&6&lDescription'
+          - '&7Right-click to receive a random PvP reward:'
+          - '&7- &dSwitcher Ball'
+          - '&7- &8Blinder Ball'
+          - '&7- &fThrowable Cobweb'
+          - '&7- &3Exotic Bone'
+          - '&7- &5Fake Pearl'
+          - '&7- &bSpeed Orb'
+          - '&7- &6Strength Orb'
+          - ''
+          - '&f* &ePrice: &f%price% Levels'
+          - '&f* &eYour Levels: &f%player_xp%'
+      voyages:
+        name: '&f1x &6&lVoyage Portal'
+        material: SEA_LANTERN
+        data: 1
+        price: 1000000
+        slot: 5
+        commands:
+          - voyage give %player% 1
+        lore:
+          - ''
+          - '&6&lDescription'
+          - '&f'
+          - '&8▍ &7Place me to create a mystical portal'
+          - '&8▍ &7that connects you and your fellow'
+          - '&8▍ &7voyagers to take on the rooms!'
+          - ''
+          - '&f* &ePrice: &f%price% Levels'
+          - '&f* &eYour Levels: &f%player_xp%'

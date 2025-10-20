@@ -2,6 +2,7 @@ package com.candyrealms.candycore.configuration;
 
 import com.candyrealms.candycore.AnubisCore;
 import com.candyrealms.candycore.utils.ColorUtil;
+import com.candyrealms.candycore.utils.CompatUtil;
 import com.candyrealms.candycore.utils.ItemCreator;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -82,6 +83,24 @@ public class ConfigManager {
     @Getter
     private ItemStack helpItem;
 
+    // Combat Actionbar settings
+    @Getter private boolean combatBarEnabled;
+    @Getter private boolean combatBarSendVictim;
+    @Getter private boolean combatBarSendAttacker;
+    @Getter private int combatBarSegments;
+    @Getter private int combatBarUpdateTicks;
+    @Getter private boolean combatBarUseCTPDuration;
+    @Getter private int combatBarDefaultDuration;
+    @Getter private String combatBarFormat;
+    @Getter private String combatBarActiveColor;
+    @Getter private String combatBarInactiveColor;
+    @Getter private String combatBarActiveChar;
+    @Getter private String combatBarInactiveChar;
+
+    // Combat Actionbar visibility
+    @Getter private boolean combatBarOpsOnly;
+    @Getter private String combatBarViewPermission;
+
     public ConfigManager(AnubisCore plugin) {
         this.plugin = plugin;
 
@@ -100,7 +119,9 @@ public class ConfigManager {
     public void cacheValues() {
         FileConfiguration masksConfig = plugin.getMasksCFG().getConfig();
 
-        prefix = config.getString("prefix");
+        boolean usePrefix = config.getBoolean("use-prefix", true);
+        String cfgPrefix = config.getString("prefix", "");
+        prefix = usePrefix ? cfgPrefix : "";
         muteMessage = config.getString("messages.chat-mute");
         unmuteMessage = config.getString("messages.chat-unmute");
         clearMessage = config.getString("messages.chat-cleared");
@@ -132,13 +153,31 @@ public class ConfigManager {
         List<String> helpLore = config.getStringList("help-star.lore");
 
         helpItem = new ItemCreator(helpMaterial, helpItemName, 1, helpData, "", helpLore).getItem();
+
+        // Combat actionbar
+        combatBarEnabled = config.getBoolean("combat-actionbar.enabled", true);
+        combatBarSendVictim = config.getBoolean("combat-actionbar.send-to-victim", true);
+        combatBarSendAttacker = config.getBoolean("combat-actionbar.send-to-attacker", true);
+        combatBarSegments = config.getInt("combat-actionbar.segments", 20);
+        combatBarUpdateTicks = config.getInt("combat-actionbar.update-ticks", 10);
+        combatBarUseCTPDuration = config.getBoolean("combat-actionbar.use-combattagplus-duration", true);
+        combatBarDefaultDuration = config.getInt("combat-actionbar.default-duration", 15);
+        combatBarFormat = config.getString("combat-actionbar.format", "&c&lCombat &7» <&a&l%bar%&7> (&f%seconds%s&7)");
+        combatBarActiveColor = config.getString("combat-actionbar.active-color", "&a&l");
+        combatBarInactiveColor = config.getString("combat-actionbar.inactive-color", "&c&l");
+        combatBarActiveChar = config.getString("combat-actionbar.active-char", ":");
+        combatBarInactiveChar = config.getString("combat-actionbar.inactive-char", ":");
+
+        // Visibility
+        combatBarOpsOnly = config.getBoolean("combat-actionbar.visibility.ops-only", false);
+        combatBarViewPermission = config.getString("combat-actionbar.visibility.permission", "");
     }
 
     public void sendReloadMessage(Player player) {
         player.sendMessage(ColorUtil.color(getReloadMessage()
                 .replace("%prefix%", getPrefix())));
 
-        player.playSound(player.getLocation(), Sound.LEVEL_UP, 7, 6);
+        CompatUtil.play(player, 7f, 6f, "LEVEL_UP", "ENTITY_PLAYER_LEVELUP");
     }
 
     public void announceChatMute() {

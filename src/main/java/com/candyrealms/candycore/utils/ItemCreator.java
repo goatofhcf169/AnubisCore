@@ -33,7 +33,7 @@ public class ItemCreator {
         assignName(name);
         assignLore(Arrays.asList(lore));
 
-        if(texture != null && !texture.isEmpty() && data == 3 && material == Material.SKULL_ITEM) {
+        if(texture != null && !texture.isEmpty() && (data == 3 || data == 0) && CompatUtil.isSkull(material)) {
             assignTexture(texture);
         }
     }
@@ -43,7 +43,7 @@ public class ItemCreator {
         assignName(name);
         assignLore(lore);
 
-        if(texture != null && !texture.isEmpty() && data == 3 && material == Material.SKULL_ITEM) {
+        if(texture != null && !texture.isEmpty() && (data == 3 || data == 0) && CompatUtil.isSkull(material)) {
             assignTexture(texture);
         }
     }
