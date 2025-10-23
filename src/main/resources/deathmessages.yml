@@ -1,0 +1,27 @@
+enabled: true
+visibility:
+  ops-only: false
+  permission: anubiscore.deathmessages.see
+pvp:
+  enabled: true
+  message: '&6&lKills &8» &c%victim% &ekills &c%killer%&f%with%.'
+  with-weapon-format: ' &eusing &6%weapon%'
+environment:
+  FALL: '%prefix% &c%victim% &ffell from a high place.'
+  VOID: '%prefix% &c%victim% &ffell into the void.'
+  LAVA: '%prefix% &c%victim% &ftried to swim in lava.'
+  FIRE: '%prefix% &c%victim% &fburned to death.'
+  FIRE_TICK: '%prefix% &c%victim% &fburned to death.'
+  DROWNING: '%prefix% &c%victim% &fdrowned.'
+  SUFFOCATION: '%prefix% &c%victim% &fsuffocated.'
+  ENTITY_EXPLOSION: '%prefix% &c%victim% &fblew up.'
+  CONTACT: '%prefix% &c%victim% &fwas pricked to death.'
+  MAGIC: '%prefix% &c%victim% &fwas killed by magic.'
+  POISON: '%prefix% &c%victim% &fwas poisoned.'
+  STARVATION: '%prefix% &c%victim% &fstarved to death.'
+  THORNS: '%prefix% &c%victim% &ftried to hurt an armored target.'
+  WITHER: '%prefix% &c%victim% &fwitherd away.'
+  LIGHTNING: '%prefix% &c%victim% &fwas struck by lightning.'
+  PROJECTILE: '%prefix% &c%victim% &fwas shot.'
+  FALLING_BLOCK: '%prefix% &c%victim% &fwas squashed by a falling block.'
+  DEFAULT: '%prefix% &c%victim% &fdied.'

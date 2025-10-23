@@ -1,0 +1,14 @@
+chance-percent: 100.0
+reward-command: "voyage give %player% 1"
+
+messages:
+  broadcast-start: true
+  broadcast-end: true
+  use-prefix: true
+  start:
+    - "&d&lGrindMobs &8» &7The event has &aSTARTED&7 for &f%time%&7!"
+    - "&d&lGrindMobs &8» &7Killing mobs has a chance to drop &dVoyage Portals&7."
+  end:
+    - "&d&lGrindMobs &8» &7The event has &cENDED&7."
+  reward: "&aYou found a &dVoyage Portal&a!"
+

@@ -1,0 +1,34 @@
+enabled: true
+
+# Match by Outpost name (case-insensitive)
+outpost-name: "Sand"
+
+# Coins multiplier to apply to ManticHoes tokens (coins) when the faction
+# controls the configured outpost.
+multiplier: 1.5
+
+hoes:
+  enabled: true
+  # optional: per-source multiplier override
+  # multiplier: 1.5
+
+rods:
+  enabled: true
+  # mode: coins|money — coins tops-up ManticHoes tokens using the event's money value as base
+  mode: coins
+  # multiplier: 1.5
+
+swords:
+  enabled: true
+  mode: coins
+  # multiplier: 1.5
+
+messages:
+  use-prefix: false
+  label: "coins"
+  notify-faction: true
+  broadcast-gain: true
+  broadcast-lose: true
+  gain: "&aYour faction captured &d%outpost%&a. &f%multiplier%x &a%label% boost active!"
+  lose: "&cYour faction lost control of &d%outpost%&c. %label% boost ended."
+

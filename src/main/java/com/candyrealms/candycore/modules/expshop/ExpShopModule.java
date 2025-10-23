@@ -171,7 +171,7 @@ public class ExpShopModule {
             String matStr = itemsSec.getString(itemId + ".material", "STONE");
             int data = itemsSec.getInt(itemId + ".data", 0);
             String texture = itemsSec.getString(itemId + ".texture", "");
-            int price = itemsSec.getInt(itemId + ".price", 0);
+            int price = itemsSec.getInt(itemId + ".price", 0); // <-- Interpret as XP POINTS
             List<String> lore = itemsSec.getStringList(itemId + ".lore");
             List<String> commands = itemsSec.isList(itemId + ".commands")
                     ? itemsSec.getStringList(itemId + ".commands")
@@ -200,9 +200,10 @@ public class ExpShopModule {
         if (!(event.getWhoClicked() instanceof Player)) return;
 
         Player player = (Player) event.getWhoClicked();
-        int playerLevel = player.getLevel();
 
-        if (playerLevel < price) {
+        // === Work in XP POINTS ===
+        int current = getCurrentExpPoints(player);
+        if (current < price) {
             player.sendMessage(ColorUtil.color(cfg("messages.cannot_afford", "&5&lEXP &fYou cannot afford this!")));
             // sound
             String legacy = cfg("sounds.cannot_afford.legacy", "VILLAGER_NO");
@@ -213,14 +214,15 @@ public class ExpShopModule {
             return;
         }
 
-        player.setLevel(playerLevel - price);
+        // Subtract XP points safely
+        setExpPoints(player, current - price);
 
         for (String cmd : new ArrayList<>(commands)) {
             if (cmd == null || cmd.trim().isEmpty()) continue;
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd.replace("%player%", player.getName()));
         }
 
-        String purchased = cfg("messages.purchased", "&aPurchased &f%item_name% &afor &f%price% &alevels.")
+        String purchased = cfg("messages.purchased", "&aPurchased &f%item_name% &afor &f%price% &aXP.")
                 .replace("%item_name%", itemName)
                 .replace("%price%", String.valueOf(price));
         player.sendMessage(ColorUtil.color(purchased));
@@ -236,7 +238,9 @@ public class ExpShopModule {
     private String replaceCommonPlaceholders(String s, Player p) {
         return ColorUtil.color(s
                 .replace("%player%", p.getName())
-                .replace("%player_xp%", String.valueOf(p.getLevel())));
+                // Show total XP points instead of levels
+                .replace("%player_xp%", String.valueOf(getCurrentExpPoints(p))));
+        // If you also want to keep levels available: add .replace("%player_level%", String.valueOf(p.getLevel()))
     }
 
     private void addInfoItem(PaginatedGui gui, Player p, String path) {
@@ -345,5 +349,35 @@ public class ExpShopModule {
             return new int[]{r, c};
         }
         return null;
+    }
+
+    // ====================== XP POINTS HELPERS ======================
+
+    /** Total XP points the player currently has (level base + progress). */
+    private int getCurrentExpPoints(Player p) {
+        int level = p.getLevel();
+        int base = xpAtLevel(level);
+        int progress = Math.round(p.getExp() * p.getExpToLevel()); // 0..getExpToLevel()
+        return base + progress;
+    }
+
+    /** Set exact total XP points; recalculates levels/progress safely across versions. */
+    private void setExpPoints(Player p, int points) {
+        if (points < 0) points = 0;
+        p.setExp(0f);
+        p.setLevel(0);
+        p.setTotalExperience(0);
+        p.giveExp(points);
+    }
+
+    /** Cumulative XP points required to reach 'level' from level 0 (Minecraft 1.8 formulas). */
+    private int xpAtLevel(int level) {
+        if (level <= 16) {
+            return level * level + 6 * level;
+        } else if (level <= 31) {
+            return (int) Math.floor(2.5 * level * level - 40.5 * level + 360);
+        } else {
+            return (int) Math.floor(4.5 * level * level - 162.5 * level + 2220);
+        }
     }
 }

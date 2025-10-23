@@ -1,0 +1,82 @@
+# Dragon Event configuration
+
+# Only allow spawning in this world
+world: staffseries
+
+dragon:
+  # Max health to set on spawn
+  health: 500.0
+
+bossbar:
+  # 1.8: uses the dragon's custom name as the bossbar title.
+  # Placeholders: %health%, %max%, %percent%
+  title: "&5&lEvent Dragon &7(&d%health%&7/&d%max%&7)"
+  # How often to refresh the name; 0 to disable updates
+  update-interval-ticks: 10
+
+messages:
+  # Broadcast when the dragon spawns. Lines are auto-centered.
+  spawn:
+    - "&d&l&m----------------------------------------"
+    - "&5&lTHE DRAGON HAS AWAKENED!"
+    - "&7Slay it for glory and rewards!"
+    - "&d&l&m----------------------------------------"
+
+  # Broadcast when the dragon dies. %player% is the killer, %faction% their faction tag
+  death: "&5&lDragon Event &8» &7&dThe Dragon was slain by &d%player%&f!"
+
+  # Optional: multi-line centered death banner
+  death-banner:
+    - "&d&l&m----------------------------------------"
+    - "&5&lTHE DRAGON HAS FALLEN!"
+    - "&7Slain by &d%player% &7of &5%faction%&7!"
+    - "&d&l&m----------------------------------------"
+
+  # Message when staff tries to spawn outside the configured world
+  not-in-world: "&cYou can only spawn the dragon in &e%world%&c."
+
+  # Message when a dragon is already active
+  already-active: "&cA dragon event is already active."
+
+# Fixed spawn location used by /dragon spawn
+spawn:
+  x: 0.5
+  y: 100.0
+  z: 0.5
+  yaw: 0.0
+  pitch: 0.0
+
+# Keep the dragon within a radius of a center (defaults to spawn)
+leash:
+  enabled: true
+  radius: 75.0
+  check-interval-ticks: 20
+  center:
+    x: 0.5
+    y: 100.0
+    z: 0.5
+
+# Keep the dragon flying a bit lower than usual
+altitude:
+  enabled: true
+  # Hard cap upper/lower altitude bounds (Y level)
+  max-y: 115.0
+  min-y: 90.0
+  # How many blocks to nudge per tick when out of bounds
+  down-step: 2.0
+
+# Rewards on dragon death
+rewards:
+  enabled: true
+  # Commands executed once, for the killer. Run as console.
+  # Placeholders: %player%, %uuid%, %faction%, %world%, %x%, %y%, %z%
+  killer-commands:
+    - "eco give %player% 100000"
+    - "hypebox give %player% halloween 1"
+    - "ac give %player% hauntedhouse 1"
+
+  # Optionally grant rewards to each ONLINE faction member of the killer
+  faction:
+    run-for-online-members: false
+    # Placeholders for each member command: %member% (target), %player% (killer), %faction%, %world%, %x%, %y%, %z%
+    commands: []

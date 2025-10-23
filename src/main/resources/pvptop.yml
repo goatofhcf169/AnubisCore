@@ -1,0 +1,59 @@
+enabled: true
+
+points:
+  kill: 1 # 1 kill = 1 point
+  koth: 25 # 1 KoTH capture = 25 points
+  dtc: 15 # 1 DTC win = 15 points
+
+gui:
+  title: "&8PvP Top"
+  rows: 5
+  filler: "BLACK_STAINED_GLASS_PANE" # leave empty for default
+  # Base64 texture used when no factions or leader not resolvable
+  placeholder_texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDM0ZTA2M2NhZmI0NjdhNWM4ZGU0M2VjNzg2MTkzOTlmMzY5ZjRhNTI0MzRkYTgwMTdhOTgzY2RkOTI1MTZhMCJ9fX0="
+  # Predetermined 10 slots (1-based) for top entries
+  # Defaults to two centered rows if not set
+  slots: [11, 12, 13, 14, 15, 16, 17, 22, 23, 24]
+
+  item:
+    name: "&e[#%rank%] &8• &6&l%faction_tag% &7[&c%points%&7]"
+    lore:
+      - "&7&m-----------------------------"
+      - "&e&l• &6&lLeader&7: &e%leader%"
+      - "&3&l• &3&lKills&7: &b%kills% &7[&b%kill_points%&7]"
+      - "&5&l• &5&lKoTHs&7: &d%koths% &7[&d%koth_points%&7]"
+      - "&4&l• &4&lDTCs&7: &c%dtc% &7[&c%dtc_points%&7]"
+      - "&6&lTotal Points&7: &e%points%"
+      - "&7&m-----------------------------"
+
+  empty:
+    name: "&e[#%rank%] &8• &7Empty"
+    lore:
+      - "&7&m-----------------------------"
+      - "&e&l• &6&lLeader&7: &eNone"
+      - "&3&l• &3&lKills&7: &b0 &7[&b0&7]"
+      - "&5&l• &5&lKoTHs&7: &d0 &7[&d0&7]"
+      - "&4&l• &4&lDTCs&7: &c0 &7[&c0&7]"
+      - "&6&lTotal Points&7: &e0"
+      - "&7&m-----------------------------"
+
+  close:
+    name: "&cClose"
+    material: "BARRIER"
+
+# Persistent data is stored under data.factions.
+# Keys are faction IDs; do not edit unless you know what you're doing.
+data:
+  factions: {}
+
+messages:
+  kill:
+    enabled: true
+    format: '&d&lPvPTop &7» &eYou earned your faction a point for getting a Kill!'
+  koth:
+    enabled: true
+    format: '&d&lPvPTop &7» &eYou earned your faction 25 points for capturing KoTH'
+  dtc:
+    enabled: true
+    format: '&d&lPvPTop &7» &eYou earned your faction 15 points for Destroying The Core!'
+

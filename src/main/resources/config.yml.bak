@@ -1,0 +1,53 @@
+﻿# AnubisCore coded for AnubisMC Network
+
+prefix: '&4&lAnubis&f&lCore &c»'
+
+increase-blocking-damage: 1.25 # Player blocking takes 25% more damage
+heads-bypass-permission: 'anubiscore.headbypass'
+safe-dz-world: 'SafeDZ'
+safe-dz-amount: 25 # The percentage to decrease sales by.
+
+messages:
+  chat-cleared: '%prefix% &fThe chat has been cleared.'
+  chat-unmute: '%prefix% &fThe chat has been unmuted.'
+  chat-mute: '%prefix% &fThe chat has been muted.'
+  reload: '%prefix% &fYou have reloaded the plugin.'
+
+help-star:
+  name: '&4&lÂ»&c&lÂ» &4&lHelp &c&lMenu &7&o(Right-Click) &c&lÂ«&4&lÂ«'
+  material: 'NETHER_STAR'
+  data: 0
+  lore:
+    - ''
+    - '&4&lDescription'
+    - '&câ–ª &fOpens a menu guiding you through our'
+    - '&câ–ª &fserver economy & features!'
+    - ''
+    - '&c&o&nRight-Click&f&o to open!'
+
+nerf-god-apples:
+  enabled: true # Whether to nerf resistance from god-apples
+  resistance-time: 20 # Reduces resistance time. Set to -1 to disable resistance entirely.
+
+protection-nerf:
+  enabled: true
+  nerf-per-piece: 6.25 # Percentage to decrease protection per level 5 piece.
+
+sharpness-buff: # Buffs sharpness above 5
+  enabled: true
+  amount: 5 # The percentage increase in damage for sharpness.
+
+better-balance:
+  enabled: true
+  message:
+    - '&4&l&m-------&c&l&m------&4&l&m------'
+    - '&4Â»&cÂ» &4&lNetwork &f&lBalances -'
+    - ''
+    - '&4Money: &c$%vault_eco_balance_formatted%'
+    - '&4Shards: &câ–%manticrods_shards%'
+    - '&4Crystals: &câ—ˆ%manticswords_crystals%'
+    - ''
+    - '&7&o(Money is the main source of currency on our network.'
+    - '&7&olearn more about our economy with the &n&o/economy&7&o command)'
+    - '&4&l&m-------&c&l&m------&4&l&m------'
+
