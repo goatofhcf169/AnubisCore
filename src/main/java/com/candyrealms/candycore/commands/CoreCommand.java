@@ -35,7 +35,6 @@ public class CoreCommand extends BaseCommand {
         configManager.reloadConfig();
         plugin.getExpCFG().reloadConfig();
         plugin.getShardsCFG().reloadConfig();
-        plugin.getDonatorCFG().reloadConfig();
         plugin.getHeadsCFG().reloadConfig();
         plugin.getDeathMessagesCFG().reloadConfig();
         // Reload PvPTop with data preservation (PvPTopCFG merges data on reload)
@@ -46,7 +45,6 @@ public class CoreCommand extends BaseCommand {
             plugin.getModuleManager().getGrindMobsModule().stop();
         }
 
-        plugin.getModuleManager().getDonatorModule().reload();
         plugin.getModuleManager().getShardsModule().reload();
         plugin.getModuleManager().getHeadsModule().reloadConfig();
         plugin.getModuleManager().getExpShopModule().reload();
@@ -60,10 +58,6 @@ public class CoreCommand extends BaseCommand {
         // GrindMobs event
         if (plugin.getModuleManager().getGrindMobsModule() != null) {
             plugin.getModuleManager().getGrindMobsModule().reload();
-        }
-        // Coins booster module
-        if (plugin.getModuleManager().getCoinsBoosterModule() != null) {
-            plugin.getModuleManager().getCoinsBoosterModule().reload();
         }
 
         if(!(sender instanceof Player)) return;
@@ -127,6 +121,8 @@ public class CoreCommand extends BaseCommand {
         sender.sendMessage(ColorUtil.color("&6Player:"));
         sender.sendMessage(ColorUtil.color(" &6/pvptop &eOpen PvP Top"));
         sender.sendMessage(ColorUtil.color(" &6/expshop &eOpen XP Shop"));
+        sender.sendMessage(ColorUtil.color(" &6/pots &eGet healing potions"));
+        sender.sendMessage(ColorUtil.color(" &6/refill &eRefill empty slots with potions"));
 
         // Chat moderation (only show if sender can use any of them)
         boolean canMute = sender.hasPermission("anubiscore.mutechat");
@@ -149,7 +145,6 @@ public class CoreCommand extends BaseCommand {
             sender.sendMessage(ColorUtil.color(" &6/givehead &e<player> Give head item"));
             sender.sendMessage(ColorUtil.color(" &6/anubiscore givehelp &e<player> Give help item"));
             sender.sendMessage(ColorUtil.color(" &6/shards give &e<player> <shard> Give a shard"));
-            sender.sendMessage(ColorUtil.color(" &6/donate &e<player> Grant donation"));
             sender.sendMessage(ColorUtil.color(" &6/revive &e<player> Open revive menu"));
             // Dragon event admin
             sender.sendMessage(ColorUtil.color(" &6/dragon spawn &eSpawn event dragon at configured location"));

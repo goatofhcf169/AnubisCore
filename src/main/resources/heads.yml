@@ -1,26 +1,32 @@
-# Dependencies: ManticRods, ManticSwords, ManticHoes
+# Supported dependencies: VulcanLoader/VulcanAPI (preferred) or ManticRods/ManticSwords/ManticHoes
 
 enabled: true
 token-deduction: 5
 money-deduction: 5
+# Currency key used by VulcanToolsAPI (via VulcanLoader). Default 'tokens'.
+vulcan-tokens-key: tokens
+# Minimum balance required before any deduction occurs (0 to disable threshold)
+min-token-balance: 0
+# Enable temporary debug logs for Vulcan tokens resolution
+debug-vulcan-tokens: false
 messages:
   redeemed-head:
-    - ''
-    - '&5&lLoot Earned &7(Player Heads)'
-    - ''
-    - '&d- &fMoney: &a%money%'
-    - '&d- &fTokens: &5%mantichoes_tokens%'
-    - ''
+    - ""
+    - "&5&lLoot Earned &7(Player Heads)"
+    - ""
+    - "&d- &fMoney: &a%money%"
+    - "&d- &fTokens: &5%upgradetools_tokens%"
+    - ""
 head-item:
-  name: '&dHead of %player%'
+  name: "&dHead of %player%"
   material: SKULL_ITEM
   data: 3
   texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWI3ZjU3NjFmNGNhNzI0NTJkYzE4ZWEyMThkYjE0OTAyMGY3ZmNiMTQ4NDMxNTQ3YTBhYWI0NGQ1NGI2Y2M3NCJ9fX0=
   lore:
-    - '&7&oSlaying a player leaves behind their skull which contains'
-    - '&7&ovaluable loot waiting to be redeemed!'
-    - ''
-    - '&d- &fMoney: &a%money%'
-    - '&d- &fTokens: &5%mantichoes_tokens%'
-    - ''
-    - '&5&l(!) &d&nRight-Click&f to sell this players head.'
+    - "&7&oSlaying a player leaves behind their skull which contains"
+    - "&7&ovaluable loot waiting to be redeemed!"
+    - ""
+    - "&d- &fMoney: &a%money%"
+    - "&d- &fTokens: &5%upgradetools_tokens%"
+    - ""
+    - "&5&l(!) &d&nRight-Click&f to sell this players head."

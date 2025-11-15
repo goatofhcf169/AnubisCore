@@ -314,11 +314,36 @@ public class PvPTopModule {
     }
 
     private boolean shouldExcludeKey(String key) {
-        if (key == null || key.isEmpty()) return true;
-        if (key.equalsIgnoreCase("RaidOutpost")) return true; // Safety if tag accidentally used as key
+        if (key == null || key.trim().isEmpty()) {
+            purgeFactionData(key);
+            return true;
+        }
+        if (key.equalsIgnoreCase("RaidOutpost")) {
+            purgeFactionData(key);
+            return true; // Safety if tag accidentally used as key
+        }
         Faction f = findFactionByAny(key);
-        if (f == null) return false;
-        return isNonPlayerFaction(f);
+        if (f == null) {
+            purgeFactionData(key);
+            return true;
+        }
+        if (isNonPlayerFaction(f)) {
+            purgeFactionData(key);
+            return true;
+        }
+        return false;
+    }
+
+    private void purgeFactionData(String key) {
+        if (key == null || key.trim().isEmpty()) {
+            return;
+        }
+        String path = "data.factions." + key;
+        if (!config.contains(path)) {
+            return;
+        }
+        config.set(path, null);
+        cfg.saveConfig();
     }
 
     private int killWeight() { return config.getInt("points.kill", 1); }

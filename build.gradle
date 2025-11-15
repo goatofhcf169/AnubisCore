@@ -5,7 +5,6 @@ plugins {
 }
 
 group = 'com.candyrealms'
-version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -79,4 +78,7 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
+}
+tasks.jar {
+    setArchiveFileName("AnubisCore.jar")
 }

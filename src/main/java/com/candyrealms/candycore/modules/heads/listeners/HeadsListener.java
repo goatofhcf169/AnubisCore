@@ -43,7 +43,24 @@ public class HeadsListener implements Listener {
         if(event.getEntity().getKiller() == null) return;
         if(event.getEntity().hasPermission(configManager.getHeadBypassPerm())) return;
 
-        event.getDrops().add(module.getPlayerHead(event.getEntity()));
+        boolean debug = module.getConfig().getBoolean("debug-vulcan-tokens", false);
+        if (debug) {
+            try {
+                org.bukkit.Bukkit.getConsoleSender().sendMessage("[AnubisCore-Heads] PlayerDeathEvent victim='" + event.getEntity().getName() + "' killer='" + (event.getEntity().getKiller() != null ? event.getEntity().getKiller().getName() : "null") + "'");
+            } catch (Throwable ignored) {}
+        }
+
+        ItemStack head = module.getPlayerHead(event.getEntity());
+        event.getDrops().add(head);
+        if (debug) {
+            try {
+                de.tr7zw.changeme.nbtapi.NBTItem n = new de.tr7zw.changeme.nbtapi.NBTItem(head);
+                de.tr7zw.changeme.nbtapi.NBTCompound c = n.getCompound("CandyHeads");
+                long money = c != null ? c.getLong("money") : 0L;
+                double tokens = c != null ? c.getDouble("tokens") : 0D;
+                org.bukkit.Bukkit.getConsoleSender().sendMessage("[AnubisCore-Heads] Dropped head NBT -> money=" + money + ", tokens=" + tokens);
+            } catch (Throwable ignored) {}
+        }
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -92,9 +109,17 @@ public class HeadsListener implements Listener {
         module.addMoney(player, money);
         module.addTokens(player, tokens);
 
+        try {
+            if (module.getConfig().getBoolean("debug-vulcan-tokens", false)) {
+                module.getClass(); // keep module ref used
+                player.getServer().getLogger().info("[Heads] Redeemed head for " + player.getName() + ": money=" + money + ", tokens=" + tokens);
+            }
+        } catch (Throwable ignored) {}
+
         List<String> message = module.getConfig().getStringList("messages.redeemed-head").stream()
                 .map(s -> s.replace("%money%", formattedMoney))
                 .map(s -> s.replace("%tokens%", formattedTokens))
+                .map(s -> s.replace("%upgradetools_tokens%", formattedTokens))
                 .map(s -> s.replace("%mantichoes_tokens%", formattedTokens))
                 .map(ColorUtil::color)
                 .collect(Collectors.toList());

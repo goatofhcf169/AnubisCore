@@ -3,9 +3,8 @@ version: '${version}'
 softdepend:
   - PlaceholderAPI
   - FactionsKore
-  - ManticHoes
-  - ManticSwords
-  - ManticRods
+  - VulcanLoader
+  - VulcanAPI
   - CombatTagPlus
   - Factions
   - DestroyTheCore

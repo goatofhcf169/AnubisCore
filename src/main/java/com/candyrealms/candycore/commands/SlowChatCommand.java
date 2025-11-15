@@ -19,7 +19,9 @@ public class SlowChatCommand extends BaseCommand {
     public void onSet(CommandSender sender, String duration) {
         long seconds = parseDuration(duration);
         if (seconds < 0) {
-            sender.sendMessage(ColorUtil.color("&d&lChat &fInvalid duration. Use &d10s&f/&d2m&f/&d1h&f/&d1d&f/&d1y&f or &doff&f."));
+            String msg = plugin.getConfigManager().getSlowChatInvalidMessage()
+                    .replace("%prefix%", plugin.getConfigManager().getPrefix());
+            sender.sendMessage(ColorUtil.color(msg));
             return;
         }
         plugin.getModuleManager().getChatModerationModule().setSlowDelay(seconds);
@@ -51,4 +53,3 @@ public class SlowChatCommand extends BaseCommand {
         }
     }
 }
-

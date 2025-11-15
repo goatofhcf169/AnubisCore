@@ -6,7 +6,6 @@ import com.candyrealms.candycore.configuration.*;
 import com.candyrealms.candycore.listeners.BalanceListeners;
 import com.candyrealms.candycore.listeners.FactionListeners;
 import com.candyrealms.candycore.listeners.MiscListeners;
-import com.candyrealms.candycore.listeners.SafeDZListeners;
 import com.candyrealms.candycore.listeners.DeathMessagesListener;
 import com.candyrealms.candycore.modules.ModuleManager;
 import com.candyrealms.candycore.modules.combat.listeners.CombatListener;
@@ -26,7 +25,6 @@ public final class AnubisCore extends JavaPlugin {
     private static AnubisCore instance;
 
     private ShardsCFG shardsCFG;
-    private DonatorCFG donatorCFG;
     private HeadsCFG headsCFG;
     private MasksCFG masksCFG;
     private ExpCFG expCFG;
@@ -48,7 +46,6 @@ public final class AnubisCore extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(ColorUtil.color("&4[&cAnubisCore&4] &fEnabling..."));
         saveDefaultConfig();
         shardsCFG = new ShardsCFG(this);
-        donatorCFG = new DonatorCFG(this);
         headsCFG = new HeadsCFG(this);
         expCFG = new ExpCFG(this);
         masksCFG = new MasksCFG(this);
@@ -80,9 +77,6 @@ public final class AnubisCore extends JavaPlugin {
                 Bukkit.getConsoleSender().sendMessage(ColorUtil.color("&4[&cAnubisCore&4] &cFailed to register grace placeholders: " + t.getClass().getSimpleName())) ;
             }
         }
-        if (Bukkit.getPluginManager().getPlugin("ManticRods") != null && Bukkit.getPluginManager().getPlugin("ManticSwords") != null) {
-            Bukkit.getPluginManager().registerEvents(new SafeDZListeners(this), this);
-        }
         if (Bukkit.getPluginManager().getPlugin("FactionsKore") != null && Bukkit.getPluginManager().getPlugin("Factions") != null) {
             Bukkit.getPluginManager().registerEvents(new FactionListeners(), this);
         }
@@ -110,9 +104,6 @@ public final class AnubisCore extends JavaPlugin {
         // GrindMobs event listener
         Bukkit.getPluginManager().registerEvents(moduleManager.getGrindMobsModule(), this);
         // Coins booster listener
-        if (moduleManager.getCoinsBoosterModule() != null) {
-            Bukkit.getPluginManager().registerEvents(moduleManager.getCoinsBoosterModule(), this);
-        }
         registerModules();
 
         // Registering the commands
@@ -121,7 +112,6 @@ public final class AnubisCore extends JavaPlugin {
         manager.registerCommand(new CoreCommand(this));
         manager.registerCommand(new ExpShopCommand(this));
         manager.registerCommand(new ShardsCommand(this));
-        manager.registerCommand(new DonateCommand(this));
         manager.registerCommand(new ReviveCommand(this));
         manager.registerCommand(new MuteChatCommand(this));
         manager.registerCommand(new LockChatCommand(this));

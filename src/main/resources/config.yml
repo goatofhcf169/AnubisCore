@@ -8,13 +8,23 @@ safe-dz-world: "SafeDZ"
 safe-dz-amount: 25 # The percentage to decrease sales by.
 
 messages:
-  chat-cleared: "%prefix% &fThe chat has been cleared."
-  chat-unmute: "%prefix% &fThe chat has been unmuted."
-  chat-mute: "%prefix% &fThe chat has been muted."
+  chat-cleared: "&d&lChat &8» &fThe chat has been cleared."
+  chat-unmute: "&d&lChat &8» &fThe chat has been unmuted."
+  chat-mute: "&d&lChat &8» &fThe chat has been muted."
   reload: "%prefix% &fYou have reloaded the plugin."
+  # Lock chat
+  chat-lock: "&d&lChat &8» &fChat has been &c&nlocked&f."
+  chat-unlock: "&d&lChat &8» &fChat has been &a&nunlocked&f."
+  chat-locked-notify: "&d&lChat &8» &fChat is currently &c&nlocked&f."
+  chat-muted-notify: "&d&lChat &8» &fChat is currently &c&nmuted&f."
+  # Slow chat
+  slowchat-enabled: "&d&lChat &8» &fChat is now in slow mode: &d%seconds%s&f."
+  slowchat-disabled: "&d&lChat &8» &fChat slow mode has been &c&ndisabled&f."
+  slowchat-notify: "&d&lChat &8» &fChat is in slow mode. Please wait &d%seconds%s&f."
+  slowchat-invalid: "&d&lChat &8» &fInvalid duration. Use &d10s&f/&d2m&f/&d1h&f/&d1d&f/&d1y&f or &doff&f."
 
 help-star:
-  name: "&6&lÂ» &6&lHelp &c&lMenu &7&o(Right-Click) &6&lÂ«"
+  name: "&6&l» &6&lHelp &c&lMenu &7&o(Right-Click) &6&l«"
   material: "NETHER_STAR"
   data: 0
   lore:
@@ -44,7 +54,7 @@ better-balance:
     - "&6&lNetwork &f&lBalances -"
     - ""
     - "&6Money: &a$%vault_eco_balance_formatted%"
-    - "&6Coins: &e%manticrods_tokens%"
+    - "&6Tokens: &e%upgradetools_tokens%"
     - ""
     - "&7&o(Money is the main source of currency on our network."
     - "&7&olearn more about our economy with the &n&o/economy&7&o command)"

@@ -83,6 +83,16 @@ public class ConfigManager {
     @Getter
     private ItemStack helpItem;
 
+    // Chat moderation messages
+    @Getter private String chatLockBroadcast;
+    @Getter private String chatUnlockBroadcast;
+    @Getter private String chatLockedNotify;
+    @Getter private String chatMutedNotify;
+    @Getter private String slowChatEnabledMessage;
+    @Getter private String slowChatDisabledMessage;
+    @Getter private String slowChatNotifyMessage;
+    @Getter private String slowChatInvalidMessage;
+
     // Combat Actionbar settings
     @Getter private boolean combatBarEnabled;
     @Getter private boolean combatBarSendVictim;
@@ -126,6 +136,15 @@ public class ConfigManager {
         unmuteMessage = config.getString("messages.chat-unmute");
         clearMessage = config.getString("messages.chat-cleared");
         reloadMessage = config.getString("messages.reload");
+        // Chat moderation configurable messages
+        chatLockBroadcast = config.getString("messages.chat-lock", "%prefix% &fChat has been &c&nlocked&f.");
+        chatUnlockBroadcast = config.getString("messages.chat-unlock", "%prefix% &fChat has been &a&nunlocked&f.");
+        chatLockedNotify = config.getString("messages.chat-locked-notify", "%prefix% &fChat is currently &c&nlocked&f.");
+        slowChatEnabledMessage = config.getString("messages.slowchat-enabled", "%prefix% &fChat is now in slow mode: &d%seconds%s&f.");
+        slowChatDisabledMessage = config.getString("messages.slowchat-disabled", "%prefix% &fChat slow mode has been &c&ndisabled&f.");
+        slowChatNotifyMessage = config.getString("messages.slowchat-notify", "%prefix% &fChat is in slow mode. Please wait &d%seconds%s&f.");
+        slowChatInvalidMessage = config.getString("messages.slowchat-invalid", "%prefix% &fInvalid duration. Use &d10s&f/&d2m&f/&d1h&f/&d1d&f/&d1y&f or &doff&f.");
+        chatMutedNotify = config.getString("messages.chat-muted-notify", "%prefix% &fChat is currently &c&nmuted&f.");
         safeDZWorld = config.getString("safe-dz-world");
         headBypassPerm = config.getString("heads-bypass-permission");
         masksAttachedLore = masksConfig.getString("attached-lore");

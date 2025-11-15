@@ -53,14 +53,16 @@ public class ChatModerationModule implements Listener {
                     // Lock enforcement
                     if (locked && !(player.hasPermission("anubiscore.lockchat.bypass") || player.hasPermission("anubiscore.admin"))) {
                         asyncChatClass.getMethod("setCancelled", boolean.class).invoke(event, true);
-                        player.sendMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat is currently &c&nlocked&f."));
+                        player.sendMessage(ColorUtil.color(plugin.getConfigManager().getChatLockedNotify()
+                                .replace("%prefix%", plugin.getConfigManager().getPrefix())));
                         return;
                     }
 
                     // Mute enforcement
                     if (muted && !(player.hasPermission("anubiscore.chat.bypass") || player.hasPermission("anubiscore.admin"))) {
                         asyncChatClass.getMethod("setCancelled", boolean.class).invoke(event, true);
-                        player.sendMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat is currently &c&nmuted&f."));
+                        player.sendMessage(ColorUtil.color(plugin.getConfigManager().getChatMutedNotify()
+                                .replace("%prefix%", plugin.getConfigManager().getPrefix())));
                         return;
                     }
 
@@ -73,7 +75,9 @@ public class ChatModerationModule implements Listener {
                         if (now - last < waitMillis) {
                             long remainingSec = Math.max(0L, (waitMillis - (now - last) + 999) / 1000);
                             asyncChatClass.getMethod("setCancelled", boolean.class).invoke(event, true);
-                            player.sendMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat is in slow mode. Please wait &d" + remainingSec + "s&f."));
+                            player.sendMessage(ColorUtil.color(plugin.getConfigManager().getSlowChatNotifyMessage()
+                                    .replace("%prefix%", plugin.getConfigManager().getPrefix())
+                                    .replace("%seconds%", String.valueOf(remainingSec))));
                             return;
                         }
                         lastMessageTime.put(player.getUniqueId(), now);
@@ -99,13 +103,15 @@ public class ChatModerationModule implements Listener {
 
         if (locked && !(player.hasPermission("anubiscore.lockchat.bypass") || player.hasPermission("anubiscore.admin"))) {
             event.setCancelled(true);
-            player.sendMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat is currently &c&nlocked&f."));
+            player.sendMessage(ColorUtil.color(plugin.getConfigManager().getChatLockedNotify()
+                    .replace("%prefix%", plugin.getConfigManager().getPrefix())));
             return;
         }
 
         if (muted && !(player.hasPermission("anubiscore.chat.bypass") || player.hasPermission("anubiscore.admin"))) {
             event.setCancelled(true);
-            player.sendMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat is currently &c&nmuted&f."));
+            player.sendMessage(ColorUtil.color(plugin.getConfigManager().getChatMutedNotify()
+                    .replace("%prefix%", plugin.getConfigManager().getPrefix())));
             return;
         }
 
@@ -117,7 +123,9 @@ public class ChatModerationModule implements Listener {
             if (now - last < waitMillis) {
                 long remainingSec = Math.max(0L, (waitMillis - (now - last) + 999) / 1000);
                 event.setCancelled(true);
-                player.sendMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat is in slow mode. Please wait &d" + remainingSec + "s&f."));
+                player.sendMessage(ColorUtil.color(plugin.getConfigManager().getSlowChatNotifyMessage()
+                        .replace("%prefix%", plugin.getConfigManager().getPrefix())
+                        .replace("%seconds%", String.valueOf(remainingSec))));
                 return;
             }
             lastMessageTime.put(player.getUniqueId(), now);
@@ -141,13 +149,15 @@ public class ChatModerationModule implements Listener {
 
         if (locked && !(player.hasPermission("anubiscore.lockchat.bypass") || player.hasPermission("anubiscore.admin"))) {
             event.setCancelled(true);
-            player.sendMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat is currently &c&nlocked&f."));
+            player.sendMessage(ColorUtil.color(plugin.getConfigManager().getChatLockedNotify()
+                    .replace("%prefix%", plugin.getConfigManager().getPrefix())));
             return;
         }
 
         if (muted && !(player.hasPermission("anubiscore.chat.bypass") || player.hasPermission("anubiscore.admin"))) {
             event.setCancelled(true);
-            player.sendMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat is currently &c&nmuted&f."));
+            player.sendMessage(ColorUtil.color(plugin.getConfigManager().getChatMutedNotify()
+                    .replace("%prefix%", plugin.getConfigManager().getPrefix())));
             return;
         }
 
@@ -159,7 +169,9 @@ public class ChatModerationModule implements Listener {
             if (now - last < waitMillis) {
                 long remainingSec = Math.max(0L, (waitMillis - (now - last) + 999) / 1000);
                 event.setCancelled(true);
-                player.sendMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat is in slow mode. Please wait &d" + remainingSec + "s&f."));
+                player.sendMessage(ColorUtil.color(plugin.getConfigManager().getSlowChatNotifyMessage()
+                        .replace("%prefix%", plugin.getConfigManager().getPrefix())
+                        .replace("%seconds%", String.valueOf(remainingSec))));
                 return;
             }
             lastMessageTime.put(player.getUniqueId(), now);
@@ -175,18 +187,23 @@ public class ChatModerationModule implements Listener {
     public void toggleLock() {
         locked = !locked;
         if (locked) {
-            Bukkit.broadcastMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat has been &c&nlocked&f."));
+            Bukkit.broadcastMessage(ColorUtil.color(plugin.getConfigManager().getChatLockBroadcast()
+                    .replace("%prefix%", plugin.getConfigManager().getPrefix())));
         } else {
-            Bukkit.broadcastMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat has been &a&nunlocked&f."));
+            Bukkit.broadcastMessage(ColorUtil.color(plugin.getConfigManager().getChatUnlockBroadcast()
+                    .replace("%prefix%", plugin.getConfigManager().getPrefix())));
         }
     }
 
     public void setSlowDelay(long seconds) {
         this.slowDelaySeconds = Math.max(0L, seconds);
         if (seconds <= 0) {
-            Bukkit.broadcastMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat slow mode has been &c&ndisabled&f."));
+            Bukkit.broadcastMessage(ColorUtil.color(plugin.getConfigManager().getSlowChatDisabledMessage()
+                    .replace("%prefix%", plugin.getConfigManager().getPrefix())));
         } else {
-            Bukkit.broadcastMessage(ColorUtil.color(plugin.getConfigManager().getPrefix() + " &fChat is now in slow mode: &d" + seconds + "s&f."));
+            Bukkit.broadcastMessage(ColorUtil.color(plugin.getConfigManager().getSlowChatEnabledMessage()
+                    .replace("%prefix%", plugin.getConfigManager().getPrefix())
+                    .replace("%seconds%", String.valueOf(seconds))));
         }
     }
 
